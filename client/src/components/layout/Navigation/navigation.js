@@ -15,16 +15,16 @@ class Navigation extends Component {
 
     logout = () => {
         this.authService
-            .logout()   
+            .logout()
             .then(res => this.props.storeUser(undefined))
             .catch(err => console.log(err))
     }
     render() {
-        return (
+        return (    <>
             <Navbar bg="dark" variant="dark" expand="md" className="nav">
-                <link rel="preconnect" href="https://fonts.gstatic.com" />
-                <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet" />
+            
                 <Link to="/">
+                
                     <Navbar.Brand >
                         <img
                             alt="Logo"
@@ -47,18 +47,23 @@ class Navigation extends Component {
                             :
                             <>
                                 <Link to="/registro">
-                            <Nav.Link as="div">Registro</Nav.Link>
-                        </Link>
-                        <Link to="/inicio-sesion">
-                            <Nav.Link as="div">Inicio sesión</Nav.Link>
+                                    <Nav.Link as="div">Registro</Nav.Link>
+                                </Link>
+                                <Link to="/inicio-sesion">
+                                    <Nav.Link as="div">Inicio sesión</Nav.Link>
+                                </Link>
+
+                            </>
+                        }
+                        <Link to="/perfil">
+                            <Nav.Link as="div">{this.props.loggedUser ? `Hola ${this.props.loggedUser.username}`: 'hola invitado'}</Nav.Link>
                         </Link>  
 
-</>
-} 
-                      
-                    </Nav>
+                        </Nav>
+                        
                 </Navbar.Collapse>
-            </Navbar>
+            </Navbar>   <link rel="preconnect" href="https://fonts.gstatic.com" />
+                <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet" /></>
         )
     }
 }

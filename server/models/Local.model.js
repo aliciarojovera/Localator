@@ -43,3 +43,5 @@ const localSchema = new Schema({
     ]
 
 })
+const Local = mongoose.model('Local', localSchema)
+module.exports = Local 

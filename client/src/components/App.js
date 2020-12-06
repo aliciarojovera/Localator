@@ -1,14 +1,14 @@
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
 import Navigation from './layout/Navigation/navigation'
-import Signup from './Signup/Signup'
-import Login from './Login/Login'
+import Signup from './pages/Signup/Signup'
+import Login from './pages/Login/Login'
 import AuthService from './../service/auth.service'
-
-
+import Profile from './pages/Profile/Profile'
+import LocalForm from './pages/Local-form/local-form'
 class App extends Component{
     constructor() {
         super()
@@ -31,12 +31,15 @@ class App extends Component{
             <>
                 <Navigation storeUser={this.setTheUser} loggedUser={this.state.loggedInUser} />
                 <Switch>
+                    <>
                     <main>
-                        <Route path="/" render={() => <h1>Hola</h1>} />
                         <Route path="/inicio-sesion" render={props => <Login storeUser={this.setTheUser} {...props} />} />
                         <Route path="/registro" render={props => <Signup storeUser={this.setTheUser} {...props} />} />
+                            <Route path="/perfil" render={props => this.state.loggedInUser ? <Profile user={this.state.loggedInUser} /> : <Redirect to="/inicio-sesion" />} />
+                            <Route path="/nuevo-local" render={props => <LocalForm {...props} />} />
 
-                    </main>
+                        </main>
+                        </>
                 </Switch>
             </>
     )
