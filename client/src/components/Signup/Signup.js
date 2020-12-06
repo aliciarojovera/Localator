@@ -27,7 +27,7 @@ class Signup extends Component {
             .signup(this.state)
             .then(theLoggedInUser => {
                 this.props.storeUser(theLoggedInUser.data)
-                this.props.history.push('/')        // redirección JS
+                this.props.history.push('/')       
             })
             .catch(err => console.log('HA HABIDO UN ERROR FUCK', err))
     }

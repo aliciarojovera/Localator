@@ -28,11 +28,12 @@ class App extends Component{
 
     render() {
         return (
-            <><Navigation />
+            <>
+                <Navigation storeUser={this.setTheUser} loggedUser={this.state.loggedInUser} />
                 <Switch>
                     <main>
                         <Route path="/" render={() => <h1>Hola</h1>} />
-                        <Route path="/inicio-sesion" render= {()=><Login/>}/>
+                        <Route path="/inicio-sesion" render={props => <Login storeUser={this.setTheUser} {...props} />} />
                         <Route path="/registro" render={props => <Signup storeUser={this.setTheUser} {...props} />} />
 
                     </main>

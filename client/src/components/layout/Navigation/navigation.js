@@ -10,22 +10,15 @@ class Navigation extends Component {
 
     constructor() {
         super()
-    this.authService = new AuthService()
+        this.authService = new AuthService()
     }
 
     logout = () => {
-        console.log('ENTRANDO EN LOGOUT')
         this.authService
-            .logout()
-            .then(res => {
-                this.props.storeUser(undefined)
-                this.props.history.push('/')     
-
-                console.log('RES DE LOGOOUT: ', res)
-            })
+            .logout()   
+            .then(res => this.props.storeUser(undefined))
             .catch(err => console.log(err))
     }
-
     render() {
         return (
             <Navbar bg="dark" variant="dark" expand="md" className="nav">
@@ -49,13 +42,20 @@ class Navigation extends Component {
                         <Link to="/">
                             <Nav.Link as="div">Inicio</Nav.Link>
                         </Link>
-                        <Link to="/registro">
+                        {this.props.loggedUser ?
+                            <Nav.Link as="div" onClick={this.logout}>Cerrar sesión</Nav.Link>
+                            :
+                            <>
+                                <Link to="/registro">
                             <Nav.Link as="div">Registro</Nav.Link>
                         </Link>
                         <Link to="/inicio-sesion">
                             <Nav.Link as="div">Inicio sesión</Nav.Link>
-                        </Link>
-                            <Nav.Link as="div" onClick ={this.logout}>Cerrar sesión</Nav.Link>
+                        </Link>  
+
+</>
+} 
+                      
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

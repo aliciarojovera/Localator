@@ -12,9 +12,6 @@ export default class AuthService {
     signup = credentials => this.apiHandler.post('/signup', credentials)
     signupOwner = credentials => this.apiHandler.post('/signup-owner', credentials)
     login = credentials => this.apiHandler.post('/login', credentials)
-    logout = () => {
-        console.log('Apunto de entrar en Api Handler')
-        this.apiHandler.post('/logout')
-    }
+    logout = () => this.apiHandler.post('/logout')
     isLoggedIn = () => this.apiHandler.get('/loggedin')
 }
