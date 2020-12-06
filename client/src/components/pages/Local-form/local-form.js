@@ -12,7 +12,7 @@ class LocalForm extends Component {
             latitude: '',
             longitude: '',
             telephone: '',
-            // owner: this.props.loggedUser ? this.props.loggedUser._id : ''
+            owner:  this.props.loggedUser._id
 
         }
         this.localService = new localService()
@@ -22,9 +22,9 @@ class LocalForm extends Component {
     handleInputChange = e => this.setState({ [e.target.name]: e.target.value })
 
     handleSubmit = e => {
-
+        console.log(this.props.logguedUser)
+        
         e.preventDefault()
-    //     console.log(props)
         this.localService
             .newLocal(this.state)
             .then(res => {console.log(res) })

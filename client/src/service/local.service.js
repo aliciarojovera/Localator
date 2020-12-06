@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default class CoasterService {
+export default class LocalService {
 
     constructor() {
         this.apiHandler = axios.create({
@@ -9,7 +9,7 @@ export default class CoasterService {
         })
     }
 
-    // getCoasters = () => this.apiHandler.get('/getAllCoasters')
-    // getCoaster = coasterId => this.apiHandler.get(`/getOneCoaster/${coasterId}`)
+    getLocals = () => this.apiHandler.get('/getAllLocals')
+    getLocal = localId => this.apiHandler.get(`/getOneLocal/${localId}`)
     newLocal = localInfo => this.apiHandler.post('/new-local', localInfo)
 }

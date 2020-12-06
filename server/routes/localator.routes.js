@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const Local = require('../models/Local.model')
 
 
-router.get('/getLocals', (req, res) => {
+router.get('/getAllLocals', (req, res) => {
 
     Local
         .find()
@@ -14,7 +14,7 @@ router.get('/getLocals', (req, res) => {
 })
 
 
-router.get('/gelLocal/:localId', (req, res) => {
+router.get('/getLocal/:localId', (req, res) => {
 
     if (!mongoose.Types.ObjectId.isValid(req.params.local_id)) {
         res.status(404).json({ message: 'Invalid ID' })
@@ -27,17 +27,18 @@ router.get('/gelLocal/:localId', (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
+
 router.post('/new-local', (req, res) => {
 console.log()
   
-    const { name, telephone, latitude, longitude} = req.body
+    const { name, telephone, latitude, longitude, owner} = req.body
     const location = {
         type: 'Point',
         coordinates: [latitude, longitude]
     }
     console.log(location)
   Local
-        .create({ name, telephone, location })
+        .create({ name, telephone, location, owner })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })

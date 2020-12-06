@@ -20,11 +20,11 @@ class Navigation extends Component {
             .catch(err => console.log(err))
     }
     render() {
-        return (    <>
+        return (<>
             <Navbar bg="dark" variant="dark" expand="md" className="nav">
-            
+
                 <Link to="/">
-                
+
                     <Navbar.Brand >
                         <img
                             alt="Logo"
@@ -35,7 +35,7 @@ class Navigation extends Component {
                         />{' '}</Navbar.Brand>
                 </Link>
                 <Link to="/">
-                    <Navbar.Brand href="/">Localator</Navbar.Brand></Link>
+                    <Navbar.Brand as="span" href="/">Localator</Navbar.Brand></Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
@@ -56,14 +56,14 @@ class Navigation extends Component {
                             </>
                         }
                         <Link to="/perfil">
-                            <Nav.Link as="div">{this.props.loggedUser ? `Hola ${this.props.loggedUser.username}`: 'hola invitado'}</Nav.Link>
-                        </Link>  
+                            <Nav.Link as="div">{this.props.loggedUser ? `Hola ${this.props.loggedUser.username}` : 'hola invitado'}</Nav.Link>
+                        </Link>
 
-                        </Nav>
-                        
+                    </Nav>
+
                 </Navbar.Collapse>
             </Navbar>   <link rel="preconnect" href="https://fonts.gstatic.com" />
-                <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet" /></>
+            <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet" /></>
         )
     }
 }
