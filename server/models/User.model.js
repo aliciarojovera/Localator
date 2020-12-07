@@ -30,6 +30,10 @@ const userSchema = new Schema({
         email: {
             type: String
         }
+    },
+    reservation: {
+        type: Schema.Types.ObjectId,
+        ref: 'Reservation'
     }
 
 })

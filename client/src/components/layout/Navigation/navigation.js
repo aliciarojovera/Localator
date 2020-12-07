@@ -42,6 +42,9 @@ class Navigation extends Component {
                         <Link to="/">
                             <Nav.Link as="div">Inicio</Nav.Link>
                         </Link>
+                        <Link to="/locales">
+                            <Nav.Link as="div">Locales</Nav.Link>
+                        </Link>
                         {this.props.loggedUser ?
                             <Nav.Link as="div" onClick={this.logout}>Cerrar sesión</Nav.Link>
                             :
