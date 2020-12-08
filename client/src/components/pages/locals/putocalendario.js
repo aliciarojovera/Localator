@@ -1,7 +1,7 @@
 
 var listDate = [];
-var startDate = '2017-02-01';
-var endDate = '2017-08-10';
+var startDate = '2020-02-01';
+var endDate = '2020-08-10';
 var dateMove = new Date(startDate);
 var strDate = startDate;
 

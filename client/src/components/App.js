@@ -49,7 +49,7 @@ class App extends Component {
                             <Route path="/perfil" render={props => this.state.loggedInUser ? <Profile loggedUser={this.state.loggedInUser} /> : <Redirect to="/inicio-sesion" />} />
                             <Route path="/nuevo-local" render={() => this.state.loggedInUser ? <LocalForm loggedUser={this.state.loggedInUser} /> : <Redirect to="/inicio-sesion" />} />
                             <Route path="/local/:local_id" render={props => <LocalDetails {...props}  loggedUser={this.state.loggedInUser}/>}/>
-                            <Route path="/nueva-sala" render={() => <RoomForm></RoomForm>}/>
+                            <Route path="/nueva-sala/:localId" render={(props) => <RoomForm {...props}></RoomForm>}/>
                         </main>
                     </>
                     </Switch>

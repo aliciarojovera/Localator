@@ -4,11 +4,9 @@ const Schema = mongoose.Schema
 
 const reservationSchema = new Schema({
 
-    type: Date,
-    available: {
-        type: Boolean,
-        default:true
-    } ,
+    date: {
+        type: Date
+    },
     owner: {
         type: Schema.Types.ObjectId,
         ref: 'User'
@@ -16,7 +14,7 @@ const reservationSchema = new Schema({
     invited: {
         type: String
     },
-    
+
 })
 const reservation = mongoose.model('Reservation', reservationSchema)
 module.exports = reservation 

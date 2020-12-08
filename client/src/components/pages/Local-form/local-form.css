@@ -1,0 +1,18 @@
+.forms{
+display: flex;
+justify-content: space-between;
+}
+
+
+.Flatpickr{
+width: 30%;
+min-width: 150px;
+}
+.hour{
+    width: 90%;
+    display:block;
+text-align: right;
+}
+.center{
+    text-align: center;
+}

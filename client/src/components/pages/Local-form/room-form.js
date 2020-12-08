@@ -5,45 +5,48 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 
 class LocalForm extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        
+        super(props)
+        
         this.state = {
             name: '',
             equipment: '',
             capacity: '',
             days: [''],
-            reserva: '',
-            local
+            schedule: '',
+            local:''
 
         }
         this.localService = new localService()
 
     }
 
-    handleInputChange = e => this.setState({ [e.target.name]: e.target.value })
+    handleInputChange = e => {
+        const local_id = this.props.match.params.localId
+        this.setState({ [e.target.name]: e.target.value })
+        this.setState({local:local_id})
+    }
 
     handleSubmit = e => {
 
         e.preventDefault()
-        this.localService
-            .newRoom(this.state)
-            .then(res => { console.log(res) })
-            .catch(err => console.log('Ha habido un error', err))
+     
+     
+            this.localService
+                .newRoom(this.state)
+                .then(res => {
+                    console.log(res)
+                    this.props.history.push(`/local/${this.state.local}`)
+
+                })
+                .catch(err => console.log('Ha habido un error', err))
+        
     }
 
-    onChange = e => {
-        console.log([e.target])
-        console.log([e.target.name])
-        if ([e.target.checked]) {
-            console.log()
-
-        }
-        this.setState({ [e.target.name]: e.target.value })
-    }
+  
     render() {
-        // const [startDate, setStartDate] = useState(
-        //     setHours(setMinutes(new Date(), 30), 16)
-        // );
+      
         return (
             <>
                 <Container>
@@ -66,13 +69,12 @@ class LocalForm extends Component {
                                     <Form.Label>Capacity</Form.Label>
                                     <Form.Control type="number" name="capacity" value={this.state.capacity} onChange={this.handleInputChange} />
                                 </Form.Group>
-                                <p>{this.local.id }</p>
                              
                             
                                 <br>
 
                                 </br>
-                                <Button variant="dark" type="submit" >Crear local</Button>
+                                <Button variant="dark" type="submit" >Crear sala</Button>
 
                             </Form>
                         </Col>
