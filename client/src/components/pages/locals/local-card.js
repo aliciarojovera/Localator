@@ -7,6 +7,7 @@ const LocalCard = ({ name, location, _id, owner, loggedUser }) => {
         <Col lg={4}>
             <Card className="Local-card">
                 <Card.Body>
+                    
                     <Card.Title>{name}</Card.Title>
 
                     <Link className="btn btn-dark btn-block btn-sm" to={`/local/${_id}`}>Ver detalles</Link>

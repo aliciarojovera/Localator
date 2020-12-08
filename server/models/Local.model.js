@@ -30,17 +30,15 @@ const localSchema = new Schema({
             capacity: Number,
             equipment: [String],
             schelude: [{
-                type: Date,
-                owner: {
-                    type: Schema.Types.ObjectId,
-                    ref: 'User'
-                },
-                invited: {
-                    type:String
-                }
+                type: Schema.Types.ObjectId,
+                ref: 'Reservation'
             }]
         }
-    ]
+    ],
+    schedule: {
+        openHour:String,
+        closeHour:String
+    }
 
 })
 const Local = mongoose.model('Local', localSchema)
