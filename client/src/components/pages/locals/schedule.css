@@ -1,0 +1,17 @@
+.table{
+    background-color: green;
+    margin:0 auto;
+    color:white;
+    margin-bottom: 0rem;
+    border: 1px solid green;
+    margin-bottom:5px
+
+}
+
+.table p{
+margin:0 
+}
+.table-col{
+    max-width: 40%;
+    text-align: center;
+}

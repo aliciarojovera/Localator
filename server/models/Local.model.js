@@ -24,20 +24,14 @@ const localSchema = new Schema({
     },
     room: [
         {
-            name: {
-                String
-            },
-            capacity: Number,
-            equipment: [String],
-            schelude: [{
-                type: Schema.Types.ObjectId,
-                ref: 'Reservation'
-            }]
+            type: Schema.Types.ObjectId,
+            ref: 'Room'
         }
     ],
     schedule: {
-        openHour:String,
-        closeHour:String
+        openHour: [{ day: String }, { day: String }, { day: String }, { day: String }, { day: String }, { day: String }, { day: String }],
+        closeHour: [{ day: String }, { day: String }, { day: String }, { day: String }, { day: String }, { day: String }, { day: String }],
+        
     }
 
 })

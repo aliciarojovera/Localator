@@ -3,6 +3,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 
 const Local = require('../models/Local.model')
+const Room = require('../models/Room.model')
 
 
 router.get('/getAllLocals', (req, res) => {
@@ -42,28 +43,45 @@ router.post('/new-local', (req, res) => {
 })
 
 
-router.post('/new-room/:localId', (req, res) => {
+router.post('/new-room/', (req, res) => {
 
-    console.log(req.params)
-    if (!mongoose.Types.ObjectId.isValid(req.params.local_id)) {
-        res.status(404).json({ message: 'Invalid ID' })
-        return
-    }
 
-    Local
-        .findById(req.params.local_id)
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json(err))
-//     const { name, equipment, capacity } = req.body
-
-// console.log(req.params)
-//     Local
+    const { name, equipment, capacity, local } = req.body
+    console.log('AND THE NAME IS. ', name)
     
-//         .findByIdAndUpdate(req.params.localId, {room: name, equipment, capacity })
-//         .then(response => res.json(response))
-//         .catch(err => res.status(500).json(err))
+console.log(req.params)
+    Room
+    
+        .create({ name, equipment, capacity })
+
+        .then(response => {
+            
+            res.json(response)
+            Local
+                .findByIdAndUpdate(local, { $push: { room: response._id } })
+                .then(res => console.log(res))
+        })
+        .catch(err => res.status(500).json(err))
 })
 
+
+router.post('/getRooms', (req, res) => {
+    const rooms= req.body
+   
+let response=[]
+    
+        Room
+            .find({_id:{$in: rooms}})
+            .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+
+    
+    
+})
+
+router.post('/newBook', (req, res) => {
+    console.log(req.body)
+})
 
 router.put('/editLocal/:localId', (req, res) => {
 
