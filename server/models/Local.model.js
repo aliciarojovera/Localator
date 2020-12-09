@@ -29,8 +29,8 @@ const localSchema = new Schema({
         }
     ],
     schedule: {
-        openHour: [{ day: String }, { day: String }, { day: String }, { day: String }, { day: String }, { day: String }, { day: String }],
-        closeHour: [{ day: String }, { day: String }, { day: String }, { day: String }, { day: String }, { day: String }, { day: String }],
+        openHour: [String],
+        closeHour: [String],
         
     }
 

@@ -17,8 +17,8 @@ class LocalForm extends Component {
             longitude: '',
             telephone: '',
             owner: this.props.loggedUser._id,
-            closeHour: [{ day: "00" }, { day: "00" }, { day: "00" }, { day: "00" }, { day: "00" }, { day: "00" }, { day: "00" }],
-            openHour: [{ day: "00" }, { day: "00" }, { day: "00" }, { day: "00" }, { day: "00" }, { day: "00" }, { day: "00" }]
+            closeHour: ["00", "00", "00", "00", "00", "00", "00"],
+            openHour: ["00", "00", "00", "00", "00", "00", "00"]
 
         }
         this.localService = new localService()
@@ -46,7 +46,7 @@ class LocalForm extends Component {
     handleOpenTime = (time, index) => {
         let openHour = [...this.state.openHour]
         const hour = time.toString().slice(16, 18)
-        openHour[index] = { day: hour }
+        openHour[index] =  hour 
         console.log(hour)
 
         this.setState({ openHour: openHour })
@@ -56,7 +56,7 @@ class LocalForm extends Component {
     handleCloseTime = (time, index) => {
         let closeHour = [...this.state.closeHour]
         const hour = time.toString().slice(16, 18)
-        closeHour[index] = { day: hour }
+        closeHour[index] =  hour 
 
         this.setState({ closeHour: closeHour })
     }

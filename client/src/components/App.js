@@ -5,7 +5,7 @@ import './App.css'
 
 import Navigation from './layout/Navigation/navigation'
 import Signup from './pages/Signup/Signup'
-import SignupOwner from './pages/Signup/Signup'
+import SignupOwner from './pages/Signup/Signup.Owner'
 
 import Login from './pages/Login/Login'
 import AuthService from './../service/auth.service'
@@ -43,8 +43,9 @@ class App extends Component {
                     <>
                         <main>
                             <Route path="/inicio-sesion" render={props => <Login storeUser={this.setTheUser} {...props} />} />
-                            <Route path="/registro" render={props => <Signup storeUser={this.setTheUser} {...props} />} />
                             <Route path="/registro-local" render={props => <SignupOwner storeUser={this.setTheUser} {...props} />} />
+
+                            <Route path="/registro" render={props => <Signup storeUser={this.setTheUser} {...props} />} />
                             <Route path="/locales" render={() => <Locals></Locals>} ></Route>
                             <Route path="/perfil" render={props => this.state.loggedInUser ? <Profile loggedUser={this.state.loggedInUser} /> : <Redirect to="/inicio-sesion" />} />
                             <Route path="/nuevo-local" render={() => this.state.loggedInUser ? <LocalForm loggedUser={this.state.loggedInUser} /> : <Redirect to="/inicio-sesion" />} />

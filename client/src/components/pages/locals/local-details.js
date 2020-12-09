@@ -15,6 +15,7 @@ class LocalDetails extends Component {
             rooms: undefined,
             date: '',
             dayWeek: '',
+            counter:1
         }
         this.localsService = new LocalsService()
         this.goBack = this.goBack.bind(this)
@@ -30,10 +31,12 @@ class LocalDetails extends Component {
         }
 
         if (local_id) {
+            
 
             this.localsService
                 .getLocal(local_id)
-                .then(res => {
+                .then(res => {console.log(local_id)
+                    //asignación de toda la info necesaria para la reserva
                     this.setState({ local: res.data })
                     this.setState({ rooms: res.data.room })
                     let a = new Date()
@@ -42,13 +45,15 @@ class LocalDetails extends Component {
                     this.setState({ date: day })
                     let dayWeek = a.slice(0, 3)
                     this.setState({ dayWeek: dayWeek })
-                    this.localsService
-                        .getRooms(this.state.rooms)
-                        .then(res => {
-                            this.setState({ rooms: res.data })
+                    console.log(res.data)
+                    // this.localsService
+                    //     .getRooms(this.state.rooms)
+                    //     //reasignación del las rooms 
+                    //     .then(res => {
+                    //         this.setState({ rooms: res.data })
 
-                        })
-                        .catch(err => console.log(err))
+                    //     })
+                    //     .catch(err => console.log(err))
                 })
                 .catch(err => console.log(err))
         }
@@ -57,16 +62,36 @@ class LocalDetails extends Component {
         this.props.history.goBack();
     }
 
-    addDay() {
-        Date.prototype.addDays = function (days) {
-            var date = new Date(this.valueOf());
-            date.setDate(date.getDate() + days);
-            return date;
-        }
+    addDay=()=>{
 
-        var date = new Date();
+        var date = new Date()
+        var days= this.state.counter
+    
+        date.setDate(date.getDate() + days)
 
-        console.log(date.addDays(1));
+        days = days + 1
+        this.setState({ counter: days })
+        date = date.toString()
+        let day = date.slice(4, 10)
+        this.setState({ date: day })
+        let dayWeek = date.slice(0, 3)
+        this.setState({ dayWeek: dayWeek })
+
+
+    }
+
+    restDay = () => {
+        var date = new Date()
+        var days = this.state.counter
+
+        days = days - 1
+        date.setDate(date.getDate() + days)
+        this.setState({ counter: days })
+        date = date.toString()
+        let day = date.slice(4, 10)
+        this.setState({ date: day })
+        let dayWeek = date.slice(0, 3)
+        this.setState({ dayWeek: dayWeek })
     }
 
 
@@ -82,11 +107,15 @@ class LocalDetails extends Component {
                         {this.state.local.owner === this.state.loggedUser._id ?
                             <>
                                 <Link to={`/nueva-sala/${this.state.local._id}`}>Nueva sala</Link>
-                                <h2 className="date">{this.state.date}</h2>
+                                <div className="flexDates">
+                                    <Button onClick={this.restDay}>Día anterior</Button>
+                                    <h2 className="date">{this.state.date}</h2>
+                                <Button onClick={this.addDay}>Siguiente día</Button>
+                                </div> 
                                 <>
                                     <Row>
 
-                                        <Table room={this.state.rooms} local={this.state.local} date={this.state.date} dayWeek={this.state.dayWeek}></Table>
+                                        <Table room={this.state.rooms} local={this.state.local} date={this.state.date} dayWeek={this.state.dayWeek}  loggedUser={this.state.loggedUser}></Table>
 
                                     </Row> </>
 

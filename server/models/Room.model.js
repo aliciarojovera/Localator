@@ -12,8 +12,11 @@ const roomSchema = new Schema({
     schelude: [{
         type: Schema.Types.ObjectId,
         ref: 'Reservation'
-    }]
-
+    }],
+    local: {
+        type: Schema.Types.ObjectId,
+        ref: 'Local'
+    }
 })
 const room = mongoose.model('Room', roomSchema)
 module.exports = room 
