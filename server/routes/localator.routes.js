@@ -23,6 +23,7 @@ router.get('/getOneLocal/:local_id', (req, res) => {
 
     Local
         .findById(req.params.local_id)
+        .populate('room')
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -47,15 +48,14 @@ router.post('/new-room/', (req, res) => {
 
 
     const { name, equipment, capacity, local } = req.body
-    console.log('AND THE NAME IS. ', name)
-    
-console.log(req.params)
+
+    console.log(req.params)
     Room
-    
-        .create({ name, equipment, capacity })
+
+        .create({ name, equipment, capacity, local })
 
         .then(response => {
-            
+
             res.json(response)
             Local
                 .findByIdAndUpdate(local, { $push: { room: response._id } })
@@ -66,17 +66,17 @@ console.log(req.params)
 
 
 router.post('/getRooms', (req, res) => {
-    const rooms= req.body
-   
-let response=[]
-    
-        Room
-            .find({_id:{$in: rooms}})
-            .then(response => res.json(response))
+    const rooms = req.body
+
+    let response = []
+
+    Room
+        .find({ _id: { $in: rooms } })
+        .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
-    
-    
+
+
 })
 
 router.post('/newBook', (req, res) => {

@@ -14,70 +14,86 @@ class Table extends Component {
             hours: [],
             date: undefined,
             room: undefined,
-            hour:''
+            hour: '',
+            loggedUser:''
         }
         this.localsService = new LocalsService()
 
     }
 
     componentDidMount = () => {
-        if (this.props) {
-            console.log(this.props)
-                this.setState({})
-
-            if (this.props.dayWeek==="Tue"){
-                console.log(this.props.local.schedule.closeHour[4].day)
-                let a = Array.from({ length: parseInt(this.props.local.schedule.closeHour[4].day) - parseInt(this.props.local.schedule.openHour[4].day) }, (v, k) => k + parseInt(this.props.local.schedule.openHour[4].day))
+        this.dateInterval =setInterval(() =>{
+      
+            if (this.props.dayWeek === "Mon") {
+                let a = Array.from({ length: parseInt(this.props.local.schedule.closeHour[0]) - parseInt(this.props.local.schedule.openHour[0]) }, (v, k) => k + parseInt(this.props.local.schedule.openHour[0]))
                 this.setState({ hours: a })
-                console.log(a)
             }
-
-
-
-
-        }
+            if (this.props.dayWeek === "Tue") {
+                let a = Array.from({ length: parseInt(this.props.local.schedule.closeHour[1]) - parseInt(this.props.local.schedule.openHour[1]) }, (v, k) => k + parseInt(this.props.local.schedule.openHour[1]))
+                this.setState({ hours: a })
+            }
+            if (this.props.dayWeek === "Wed") {
+                let a = Array.from({ length: parseInt(this.props.local.schedule.closeHour[2]) - parseInt(this.props.local.schedule.openHour[2]) }, (v, k) => k + parseInt(this.props.local.schedule.openHour[2]))
+                this.setState({ hours: a })
+            }
+            if (this.props.dayWeek === "Thu") {
+                let a = Array.from({ length: parseInt(this.props.local.schedule.closeHour[3]) - parseInt(this.props.local.schedule.openHour[3]) }, (v, k) => k + parseInt(this.props.local.schedule.openHour[3]))
+                this.setState({ hours: a })
+            }
+            if (this.props.dayWeek === "Fri") {
+                let a = Array.from({ length: parseInt(this.props.local.schedule.closeHour[4]) - parseInt(this.props.local.schedule.openHour[4]) }, (v, k) => k + parseInt(this.props.local.schedule.openHour[4]))
+                this.setState({ hours: a })
+            }
+            if (this.props.dayWeek === "Sat") {
+                let a = Array.from({ length: parseInt(this.props.local.schedule.closeHour[5]) - parseInt(this.props.local.schedule.openHour[5]) }, (v, k) => k + parseInt(this.props.local.schedule.openHour[5]))
+                this.setState({ hours: a })
+            }
+            if (this.props.dayWeek === "Sun") {
+                let a = Array.from({ length: parseInt(this.props.local.schedule.closeHour[6]) - parseInt(this.props.local.schedule.openHour[6]) }, (v, k) => k + parseInt(this.props.local.schedule.openHour[6]))
+                this.setState({ hours: a })
+            }}, 100)
 
     }
-    setRoom=(roomid)=> {
+    componentWillUnmount() {
+        clearInterval(this.dateInterval)
+    }
+    setRoom = (roomid) => {
         const room_id = roomid
         this.setState({ room: room_id })
-        console.log(this.state.room)
-    }
-    
-    newBook = (elm) => {
-        this.setState({hour:elm})
-        this.localsService
-        .newBook(this.state)
     }
 
+    newBook = (elm) => {
+        this.setState({ hour: elm })
+        this.setState({loggedUser:this.props.loggedUser})
+        this.setState({ date: this.props.date })
+        this.localsService
+            .newBook(this.state)
+    }
+  
     render() {
+
         return (
             <>
-                {this.props
+                {this.props.local.schedule
                     ?
                     <>
-
-                        {this.props.room.map(element =>
-
-                            <Col className="table-col" >
-                                <div onClick={() =>this.setRoom(element._id)}>
-                                <h2>{element.name}</h2>
+                        {this.props.room.map((element, idx) =>
                                 
-                                {this.state.hours.map(elm =>
-                                    
+                            <Col key={idx} className="table-col" onClick={() => this.setRoom(element._id)} >
+                              
 
-                                    <Link onClick={() => this.newBook(elm)}><div className="table" ><p>{elm}</p></div></Link>
+                                    <h2>{element.name}</h2>
 
-                                )}
-</div>
+                                    {this.state.hours.map((elm, idx) =>
+                                        <Link key={idx} onClick={() => this.newBook(elm, this.state)}><div className="table" ><p>{elm}</p></div></Link>
+                                    )}
+
                             </Col>)}
                     </>
 
                     :
                     null
                 }
-
-
 
             </>
 
