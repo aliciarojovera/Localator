@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
-
 const Local = require('../models/Local.model')
 const Room = require('../models/Room.model')
 
@@ -68,25 +67,27 @@ router.post('/new-room/', (req, res) => {
 router.post('/getRooms', (req, res) => {
     const rooms = req.body
 
-    let response = []
 
     Room
         .find({ _id: { $in: rooms } })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
-
-
 })
 
-router.post('/newBook', (req, res) => {
+
+
+
+router.post('/edit-local', (req, res) => {
     console.log(req.body)
-})
-
-router.put('/editLocal/:localId', (req, res) => {
-
+    const { id, name, latitude, longitude, closeHour, openHour, telephone }=req.body
+    const location = {
+        type: 'Point',
+        coordinates: [latitude, longitude]
+    }
+    const schedule = { openHour, closeHour }
     Local
-        .findByIdAndUpdate(req.params.localId, req.body)
+        .findByIdAndUpdate(id, {name, location, schedule, telephone})
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })

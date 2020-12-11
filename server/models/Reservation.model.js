@@ -14,6 +14,10 @@ const reservationSchema = new Schema({
     invited: {
         type: String
     },
+    room: {
+        type: Schema.Types.ObjectId,
+        ref: 'Room'
+    }
 
 })
 const reservation = mongoose.model('Reservation', reservationSchema)

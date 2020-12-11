@@ -9,7 +9,7 @@ const roomSchema = new Schema({
     name: String,
     capacity: Number,
     equipment: [String],
-    schelude: [{
+    reservation: [{
         type: Schema.Types.ObjectId,
         ref: 'Reservation'
     }],

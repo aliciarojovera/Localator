@@ -23,18 +23,18 @@ const userSchema = new Schema({
         type: Number,
         require: true
     },
-    members: {
+    members: [{
         name: {
             type: String
         },
         email: {
             type: String
         }
-    },
-    reservation: {
+    }],
+    reservation: [{
         type: Schema.Types.ObjectId,
         ref: 'Reservation'
-    }
+    }]
 
 })
 
