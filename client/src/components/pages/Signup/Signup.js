@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import AuthService from '../../../service/auth.service'
-
+import {Link} from 'react-router-dom'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 
 class Signup extends Component {
@@ -62,6 +62,8 @@ class Signup extends Component {
                                 </Form.Group>
                                 <Button variant="dark" type="submit">Registrarme</Button>
                             </Form>
+                            <br/>
+                            <Link to="/registro-local">¿Tienes un local? ¡Regístrate aquí!</Link>
                         </Col>
                     </Row>
                 </Container>

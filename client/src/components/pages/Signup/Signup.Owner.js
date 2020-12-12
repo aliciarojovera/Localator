@@ -27,7 +27,7 @@ class Signup extends Component {
             .signupOwner(this.state)
             .then(theLoggedInUser => {
                 this.props.storeUser(theLoggedInUser.data)
-                this.props.history.push('/')
+                this.props.history.push('/profile')
             })
             .catch(err => console.log('Ha habido un error', err))
     }

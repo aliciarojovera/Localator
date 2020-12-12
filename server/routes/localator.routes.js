@@ -48,7 +48,6 @@ router.post('/new-room/', (req, res) => {
 
     const { name, equipment, capacity, local } = req.body
 
-    console.log(req.params)
     Room
 
         .create({ name, equipment, capacity, local })

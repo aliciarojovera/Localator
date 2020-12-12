@@ -11,6 +11,7 @@ export default class LocalService {
 
     getLocals = () => this.apiHandler.get('/getAllLocals')
     getLocal = localId => this.apiHandler.get(`/getOneLocal/${localId}`)
+    editLocal = localInfo => this.apiHandler.post(`/edit-local`, localInfo)
     newLocal = localInfo => this.apiHandler.post('/new-local', localInfo)
     newRoom = localInfo => this.apiHandler.post(`/new-room/`, localInfo)
     getRooms = roomsInfo => this.apiHandler.post('/getRooms', roomsInfo)

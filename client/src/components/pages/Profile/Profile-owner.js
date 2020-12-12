@@ -1,11 +1,11 @@
 
 import { Button, Container, Row } from 'react-bootstrap'
-
 import { Link } from 'react-router-dom'
+import React, { Component } from 'react'
 
 import LocalCard from '../locals/local-card'
-import React, { Component } from 'react'
 import LocalService from './../../../service/local.service'
+import './Profile-owner.css'
 
 
 class ProfileOwner extends Component {
@@ -13,6 +13,7 @@ class ProfileOwner extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            loggedUser:undefined,
             locals: undefined,
             owner: this.props.loggedUser._id
         }
@@ -34,20 +35,23 @@ class ProfileOwner extends Component {
             })
             .catch(err => { console.log(err) })
     }
-    componentDidMount = () => this.refreshLocals()
+    componentDidMount = () => {
+        this.setState({ loggedUser: this.props.loggedUser._id })
+        this.refreshLocals()
+    }
 
 
     render() {
         return (
             <>
-                <h3>SOY OWNER PROFILE</h3>
-                <Container>
-                    <h1>Listado de locales</h1>
+                
+                <Container className="profileOwner">
+                    <h1>Tus locales</h1>
                     {this.state.locals ?
                         <>
-                            <Link to="/nuevo-local"><Button>New Local</Button></Link>
+                            <Link to="/nuevo-local"><Button className="btn btn-dark btn-sm btn-new">Nuevo local</Button></Link>
                             <Row>
-                                {this.state.locals.map(elm => <LocalCard key={elm._id} {...elm} loggedUser={this.props.loggedUser} />)}
+                                {this.state.locals.map(elm => <LocalCard key={elm._id} {...elm} loggedUser={this.props.loggedUser._id} />)}
                             </Row></>
                         :
                         <h1>cargando</h1>

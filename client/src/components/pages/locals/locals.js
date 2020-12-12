@@ -4,12 +4,13 @@ import React, { Component } from 'react'
 import LocalService from '../../../service/local.service'
 
 
-class ProfileOwner extends Component {
+class Locals extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             locals: undefined,
+            loggedUser:undefined
         }
         this.localService = new LocalService()
     }
@@ -19,9 +20,13 @@ class ProfileOwner extends Component {
         this.localService
             .getLocals()
             .then(res => {
-               
                 this.setState({ locals: res.data })
-
+                if (this.props.loggedUser) {
+                    this.setState({ loggedUser: this.props.loggedUser._id})
+                }
+                else {
+                    
+                }
             })
             .catch(err => { console.log(err) })
     }
@@ -36,7 +41,7 @@ class ProfileOwner extends Component {
                     {this.state.locals ?
                         <>
                             <Row>
-                                {this.state.locals.map(elm => <LocalCard key={elm._id} {...elm} />)}
+                                {this.state.locals.map(elm => <LocalCard key={elm._id} {...elm} loggedUser={this.state.loggedUser}/>)}
                             </Row></>
                         :
                         <h1>cargando</h1>
@@ -47,5 +52,5 @@ class ProfileOwner extends Component {
     }
 }
 
-export default ProfileOwner
+export default Locals
 

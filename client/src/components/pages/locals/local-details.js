@@ -2,24 +2,26 @@ import React, { Component } from 'react'
 import LocalsService from './../../../service/local.service'
 import { Link } from 'react-router-dom'
 import { Container, Row, Col, Button } from 'react-bootstrap'
-import Table from './schedule'
 import './local-details.css'
-
+import BookingSchedule from './booking/bookingSchedule'
+import BookingService from './../../../service/booking.service'
 class LocalDetails extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
             local: undefined,
-            loggedUser: undefined,
+            loggedUser: this.props.loggedUser,
             rooms: undefined,
-            date: '',
-            dayWeek: '',
-            counter:1
+
+            counter: 1,
+            currentDate: undefined
         }
         this.localsService = new LocalsService()
         this.goBack = this.goBack.bind(this)
+        this.bookingService = new BookingService()
     }
+
 
     componentDidMount = () => {
         const local_id = this.props.match.params.local_id
@@ -31,95 +33,89 @@ class LocalDetails extends Component {
         }
 
         if (local_id) {
-            
 
             this.localsService
                 .getLocal(local_id)
-                .then(res => {console.log(local_id)
+                .then(res => {
                     //asignación de toda la info necesaria para la reserva
-                    this.setState({ local: res.data })
-                    this.setState({ rooms: res.data.room })
-                    let a = new Date()
-                    a = a.toString()
-                    let day = a.slice(4, 10)
-                    this.setState({ date: day })
-                    let dayWeek = a.slice(0, 3)
-                    this.setState({ dayWeek: dayWeek })
-                    console.log(res.data)
-                    // this.localsService
-                    //     .getRooms(this.state.rooms)
-                    //     //reasignación del las rooms 
-                    //     .then(res => {
-                    //         this.setState({ rooms: res.data })
+                    let today = new Date()
+                    today = today.toString()
+                    this.setState({ local: res.data, rooms: res.data.room, currentDate: today }, () => this.findBooks())
 
-                    //     })
-                    //     .catch(err => console.log(err))
                 })
                 .catch(err => console.log(err))
         }
+
+
+
+
+
     }
+
+
     goBack() {
         this.props.history.goBack();
     }
 
-    addDay=()=>{
-
-        var date = new Date()
-        var days= this.state.counter
-    
-        date.setDate(date.getDate() + days)
-
-        days = days + 1
-        this.setState({ counter: days })
+    timeout
+    addDay = e => {
+        e.preventDefault()
+        let date = new Date(this.state.currentDate)
+        date.setDate(date.getDate() + 1)
         date = date.toString()
-        let day = date.slice(4, 10)
-        this.setState({ date: day })
-        let dayWeek = date.slice(0, 3)
-        this.setState({ dayWeek: dayWeek })
-
-
+        this.setState({ currentDate: date })
     }
 
-    restDay = () => {
-        var date = new Date()
-        var days = this.state.counter
+    findBooks() {
+      console.log(this.state.rooms)
+        this.bookingService
+                .getBooks(this.state.rooms)
+                .then(res => console.log(res))
+                .catch(err => console.log(err))
+      
+    }
 
-        days = days - 1
-        date.setDate(date.getDate() + days)
-        this.setState({ counter: days })
+
+    restDay = e => {
+        e.preventDefault()
+        let date = new Date(this.state.currentDate)
+
+        date.setDate(date.getDate() - 1)
         date = date.toString()
-        let day = date.slice(4, 10)
-        this.setState({ date: day })
-        let dayWeek = date.slice(0, 3)
-        this.setState({ dayWeek: dayWeek })
+        this.setState({ currentDate: date })
     }
 
 
     render() {
 
         return (
-            <Container className="local-details">
+            <Container className="local-details center">
                 {this.state.local && this.state.rooms
                     ?
                     <>
 
-                        <h1> {this.state.local.name}</h1>
+                        <h1 > {this.state.local.name}</h1>
                         {this.state.local.owner === this.state.loggedUser._id ?
                             <>
-                                <Link to={`/nueva-sala/${this.state.local._id}`}>Nueva sala</Link>
+                                <Link className="btn btn-dark btn-sm " to={`/nueva-sala/${this.state.local._id}`}>Nueva sala</Link>
                                 <div className="flexDates">
-                                    <Button onClick={this.restDay}>Día anterior</Button>
-                                    <h2 className="date">{this.state.date}</h2>
-                                <Button onClick={this.addDay}>Siguiente día</Button>
-                                </div> 
+                                    <Button className="btn btn-dark new-room" onClick={this.restDay}>Día anterior</Button>
+                                    <h2 className="date">{this.state.currentDate.slice(0, 10)}</h2>
+                                    <Button className="btn btn-dark" onClick={this.addDay}>Siguiente día</Button>
+                                </div>
                                 <>
                                     <Row>
 
-                                        <Table room={this.state.rooms} local={this.state.local} date={this.state.date} dayWeek={this.state.dayWeek}  loggedUser={this.state.loggedUser}></Table>
+                                        {this.state.local.room.map((elm) =>
+                                            <Col key={elm._id}>{elm.name}
+                                                <BookingSchedule sala={elm._id} local={this.state.local} currentDate={this.state.currentDate} loggedUser={this.props.loggedUser} />
 
+                                            </Col>
+
+                                        )}
                                     </Row> </>
-
                             </>
+
                             :
 
                             <>
@@ -146,5 +142,6 @@ class LocalDetails extends Component {
         )
     }
 }
+
 
 export default LocalDetails
