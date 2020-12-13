@@ -13,9 +13,9 @@ class LocalDetails extends Component {
             local: undefined,
             loggedUser: this.props.loggedUser,
             rooms: undefined,
-
+            books:undefined,
             counter: 1,
-            currentDate: undefined
+            currentDate: undefined,
         }
         this.localsService = new LocalsService()
         this.goBack = this.goBack.bind(this)
@@ -37,18 +37,13 @@ class LocalDetails extends Component {
             this.localsService
                 .getLocal(local_id)
                 .then(res => {
-                    //asignación de toda la info necesaria para la reserva
                     let today = new Date()
                     today = today.toString()
                     this.setState({ local: res.data, rooms: res.data.room, currentDate: today }, () => this.findBooks())
-
+                    
                 })
                 .catch(err => console.log(err))
         }
-
-
-
-
 
     }
 
@@ -57,7 +52,6 @@ class LocalDetails extends Component {
         this.props.history.goBack();
     }
 
-    timeout
     addDay = e => {
         e.preventDefault()
         let date = new Date(this.state.currentDate)
@@ -66,13 +60,17 @@ class LocalDetails extends Component {
         this.setState({ currentDate: date })
     }
 
-    findBooks() {
-      console.log(this.state.rooms)
+    findBooks = () => {
         this.bookingService
                 .getBooks(this.state.rooms)
-                .then(res => console.log(res))
+                .then(res => this.setState({books: res.data}))
                 .catch(err => console.log(err))
       
+    }
+
+    printBooks=()=> {
+
+
     }
 
 
@@ -90,7 +88,7 @@ class LocalDetails extends Component {
 
         return (
             <Container className="local-details center">
-                {this.state.local && this.state.rooms
+                {this.state.local && this.state.books
                     ?
                     <>
 
@@ -108,7 +106,7 @@ class LocalDetails extends Component {
 
                                         {this.state.local.room.map((elm) =>
                                             <Col key={elm._id}>{elm.name}
-                                                <BookingSchedule sala={elm._id} local={this.state.local} currentDate={this.state.currentDate} loggedUser={this.props.loggedUser} />
+                                                <BookingSchedule sala={elm._id} local={this.state.local} currentDate={this.state.currentDate} loggedUser={this.props.loggedUser} books={this.state.books}/>
 
                                             </Col>
 

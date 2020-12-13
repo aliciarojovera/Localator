@@ -18,10 +18,10 @@ router.post('/newBook', (req, res) => {
         .then(res => {
             bookId = res._id
             User
-                .findByIdAndUpdate(owner, { $push: { reservation: res._id } })
+                .findByIdAndUpdate(owner, { $push: { reservation: res._id } }, { new: true } )
                 .then(() =>
                     Room
-                        .findByIdAndUpdate(room, { $push: { reservation: res._id } })
+                        .findByIdAndUpdate(room, { $push: { reservation: res._id } },{new:true})
                         .then(response => res.json(response))
                         .catch(err => res.status(500).json(err))
 
@@ -36,20 +36,15 @@ router.post('/newBook', (req, res) => {
 router.post('/findBooks', (req, res) => {
 
     let rooms = req.body
-    let id = []
-    let books = []
+    
     let idRooms = rooms.map(a=>a._id)
 
 
         Reservation
             .find({ room:idRooms})
             .then(response => res.json(response))
-
             .catch(err => res.status(500).json(err))
-    
-
-
-    
+   
 })
 
 
