@@ -11,7 +11,7 @@ class LocalDetails extends Component {
         super(props)
         this.state = {
             local: undefined,
-            loggedUser: this.props.loggedUser,
+            loggedUser: this.props.loggedUser || "",
             rooms: undefined,
             books: undefined,
             counter: 1,
@@ -25,12 +25,6 @@ class LocalDetails extends Component {
 
     componentDidMount = () => {
         const local_id = this.props.match.params.local_id
-
-        if (this.props.loggedUser) {
-            this.setState({ loggedUser: this.props.loggedUser })
-        } else {
-            this.setState({ loggedUser: "null" })
-        }
 
         if (local_id) {
 
@@ -67,9 +61,12 @@ class LocalDetails extends Component {
             .catch(err => console.log(err))
 
     }
-
-    printBooks = () => {
-
+    refreshBooks = () => {
+      
+        this.bookingService
+            .getBooks(this.state.rooms)
+            .then(res => this.setState({ books: res.data }))
+            .catch(err => console.log(err))
 
     }
 
@@ -77,7 +74,6 @@ class LocalDetails extends Component {
     restDay = e => {
         e.preventDefault()
         let date = new Date(this.state.currentDate)
-
         date.setDate(date.getDate() - 1)
         date = date.toString()
         this.setState({ currentDate: date })
@@ -106,7 +102,7 @@ class LocalDetails extends Component {
 
                                         {this.state.local.room.map((elm) =>
                                             <Col key={elm._id}>{elm.name}
-                                                <BookingSchedule sala={elm._id} local={this.state.local} currentDate={this.state.currentDate} loggedUser={this.props.loggedUser} books={this.state.books} />
+                                                <BookingSchedule room={elm._id} local={this.state.local} currentDate={this.state.currentDate} loggedUser={this.props.loggedUser} books={this.state.books.filter(book => book.room === elm._id)} updateBooks={this.refreshBooks} storeUser={this.props.storeUser} />
 
                                             </Col>
 

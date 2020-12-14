@@ -4,6 +4,8 @@ import { Form, Col, Row, Container, Button, FormLabel } from 'react-bootstrap'
 import "flatpickr/dist/themes/material_green.css";
 import Flatpickr from "react-flatpickr";
 import './local-form.css'
+import Autocomplete from '../Maps/Autocomplete'
+
 
 class LocalForm extends Component {
 
@@ -14,6 +16,7 @@ class LocalForm extends Component {
             name: '',
             latitude: '',
             longitude: '',
+            address: '',
             telephone: '',
             closeHour: ["00", "00", "00", "00", "00", "00", "00"],
             openHour: ["00", "00", "00", "00", "00", "00", "00"],
@@ -30,8 +33,7 @@ class LocalForm extends Component {
         this.localService
             .getLocal(localId)
             .then(res => {
-                this.setState({ name: res.data.name, rooms: res.data.room, latitude: res.data.location.coordinates[0], longitude: res.data.location.coordinates[1], openHour: res.data.schedule.openHour, closeHour: res.data.schedule.closeHour, telephone: res.data.telephone })
-                console.log(this.state)
+                this.setState({ name: res.data.name, rooms: res.data.room, latitude: res.data.location.coordinates[0], longitude: res.data.location.coordinates[1], address:res.data.address, openHour: res.data.schedule.openHour, closeHour: res.data.schedule.closeHour, telephone: res.data.telephone })
             })
     }
 
@@ -71,6 +73,14 @@ class LocalForm extends Component {
         this.setState({ closeHour: closeHour })
     }
 
+//  el padre coge el resultado del autocomplete
+latLngHandler = (latLng, address) => {
+    this.setState({
+        latitude: latLng.lat,
+        longitude: latLng.lng,
+        address: address
+    })
+}
 
     render() {
 
@@ -94,6 +104,11 @@ class LocalForm extends Component {
                                 <Form.Group controlId="telephone">
                                     <Form.Label>Teléfono</Form.Label>
                                     <Form.Control type="Text" name="telephone" value={this.state.telephone} onChange={this.handleInputChange} />
+                                </Form.Group>
+
+                                <Form.Group>
+                                    <Form.Label>Dirección</Form.Label>
+                                    <Autocomplete handler={this.latLngHandler} defAddress={this.state.address}></Autocomplete>
                                 </Form.Group>
 
                                 <Form.Group controlId="latitude">

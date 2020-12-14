@@ -2,7 +2,7 @@ import { Container, Row } from 'react-bootstrap'
 import LocalCard from './local-card'
 import React, { Component } from 'react'
 import LocalService from '../../../service/local.service'
-
+import Map from '../Maps/Map'
 
 class Locals extends Component {
 
@@ -33,6 +33,7 @@ class Locals extends Component {
     render() {
         return (
             <>
+                <Map locals={this.state.locals} />
                 <Container>
                     <h1>Listado de locales</h1>
                     {this.state.locals ?

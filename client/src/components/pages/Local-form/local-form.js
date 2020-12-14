@@ -4,6 +4,7 @@ import { Form, Col, Row, Container, Button, FormLabel } from 'react-bootstrap'
 import "flatpickr/dist/themes/material_green.css";
 import Flatpickr from "react-flatpickr";
 import './local-form.css'
+import Autocomplete from '../Maps/Autocomplete'
 
 
 class LocalForm extends Component {
@@ -15,6 +16,7 @@ class LocalForm extends Component {
             latitude: '',
             longitude: '',
             telephone: '',
+            address: '',
             owner: this.props.loggedUser._id,
             closeHour: ["00", "00", "00", "00", "00", "00", "00"],
             openHour: ["00", "00", "00", "00", "00", "00", "00"],
@@ -60,6 +62,14 @@ class LocalForm extends Component {
         this.setState({ closeHour: closeHour })
     }
 
+    // el padre coge el resultado del autocomplete
+    latLngHandler = (latLng, address) => {
+        this.setState({
+            latitude: latLng.lat,
+            longitude: latLng.lng,
+            address: address
+        })
+    }
 
     render() {
 
@@ -83,6 +93,11 @@ class LocalForm extends Component {
                                     <Form.Control type="Text" name="telephone" value={this.state.telephone} onChange={this.handleInputChange} />
                                 </Form.Group>
 
+                                <Form.Group>
+                                    <Form.Label>Dirección</Form.Label>
+                                    <Autocomplete handler={this.latLngHandler}></Autocomplete>
+                                </Form.Group>
+
                                 <Form.Group controlId="latitude">
                                     <Form.Label>Latitud</Form.Label>
                                     <Form.Control type="text" name="latitude" value={this.state.latitude} onChange={this.handleInputChange} />
@@ -98,7 +113,7 @@ class LocalForm extends Component {
                                 </div>
 
                                 {this.state.days.map((elm, idx) => 
-                                <div className="forms">
+                                    <div key={idx} className="forms">
                                     <label>{elm}</label>
                                     <div className="hour">
                                     <Flatpickr className="Flatpickr"

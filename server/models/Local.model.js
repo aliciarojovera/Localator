@@ -22,6 +22,11 @@ const localSchema = new Schema({
         },
         coordinates: [Number]
     },
+    //=====> MAPS <=====
+    address: {
+        type: String,
+    },
+    //=====> MAPS <=====
     room: [
         {
             type: Schema.Types.ObjectId,

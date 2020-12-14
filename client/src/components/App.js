@@ -52,7 +52,7 @@ class App extends Component {
                             <Route path="/locales" render={(props) => <Locals {...props} loggedUser={this.state.loggedInUser}></Locals>} ></Route>
                             <Route path="/perfil" render={(props) => this.state.loggedInUser ? <Profile {...props} loggedUser={this.state.loggedInUser} /> : <Redirect to="/inicio-sesion" />} />
                             <Route path="/nuevo-local" render={() => this.state.loggedInUser ? <LocalForm loggedUser={this.state.loggedInUser} /> : <Redirect to="/inicio-sesion" />} />
-                            <Route path="/local/:local_id" render={props => <LocalDetails {...props} loggedUser={this.state.loggedInUser} />} />
+                            <Route path="/local/:local_id" render={props => <LocalDetails {...props} loggedUser={this.state.loggedInUser} storeUser={this.setTheUser} />}/>
                             <Route path="/editar-local/:local_id" render={props => <EditForm {...props}></EditForm>}/>
                             <Route path="/nueva-sala/:localId" render={(props) => <RoomForm {...props}></RoomForm>} />
                             <Route exact path="/" render={()=><Background></Background>} />

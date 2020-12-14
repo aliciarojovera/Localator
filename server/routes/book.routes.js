@@ -6,46 +6,37 @@ const Room = require('../models/Room.model')
 const User = require('../models/User.model')
 
 
-router.post('/newBook', (req, res) => {
-    const room = req.body.bookRoom
-    const owner = req.body.loggedUser._id
-    const date = req.body.bookDate
-    let bookId = ''
-    console.log(req.body)
-    console.log(date)
+router.post('/findBooks', (req, res) => {
+
+    let rooms = req.body
+
+    let idRooms = rooms.map(room => room._id)
+
     Reservation
-        .create({ room, owner, date })
-        .then(res => {
-            bookId = res._id
-            User
-                .findByIdAndUpdate(owner, { $push: { reservation: res._id } }, { new: true } )
-                .then(() =>
-                    Room
-                        .findByIdAndUpdate(room, { $push: { reservation: res._id } },{new:true})
-                        .then(response => res.json(response))
-                        .catch(err => res.status(500).json(err))
-
-                )
-                .catch(err => res.status(500).json(err))
-
-        })
+        .find({ room: { $in: idRooms } })
+        .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
 })
 
-router.post('/findBooks', (req, res) => {
+router.post('/newBook', (req, res) => {
+    const { room, owner, date } = req.body
+    console.log(req.body)
 
-    let rooms = req.body
-    
-    let idRooms = rooms.map(a=>a._id)
+    Reservation
+        .create({ room, owner, date })
+        .then(res => {
+            const userPromise = User.findByIdAndUpdate(res.owner, { $push: { reservation: res._id } }, { new: true })
+            const roomPromise = Room.findByIdAndUpdate(res.room, { $push: { reservation: res._id } }, { new: true })
+            return Promise.all([userPromise, roomPromise])
+         
 
+        })
+        .then(response => res.json(response[0]))
+        .catch(err => res.status(500).json(err))
 
-        Reservation
-            .find({ room:idRooms})
-            .then(response => res.json(response))
-            .catch(err => res.status(500).json(err))
-   
 })
+
 
 
 module.exports = router

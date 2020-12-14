@@ -9,6 +9,6 @@ export default class BookingService {
         })
     }
 
+    getBooks= roomsId => this.apiHandler.post('/findBooks', roomsId)
     newBook = bookInfo => this.apiHandler.post('/newBook', bookInfo)
-    getBooks= roomId => this.apiHandler.post('/findBooks', roomId)
 }

@@ -30,14 +30,14 @@ router.get('/getOneLocal/:local_id', (req, res) => {
 
 router.post('/new-local', (req, res) => {
 
-    const { name, telephone, latitude, longitude, owner, openHour, closeHour } = req.body
+    const { name, telephone, latitude, longitude, owner, address, openHour, closeHour } = req.body
     const location = {
         type: 'Point',
         coordinates: [latitude, longitude]
     }
     const schedule = { openHour, closeHour }
     Local
-        .create({ name, telephone, location, owner, schedule })
+        .create({ name, telephone, location, owner, schedule, address})
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
@@ -79,14 +79,14 @@ router.post('/getRooms', (req, res) => {
 
 router.post('/edit-local', (req, res) => {
     console.log(req.body)
-    const { id, name, latitude, longitude, closeHour, openHour, telephone }=req.body
+    const { id, name, latitude, longitude, closeHour, openHour, address, telephone }=req.body
     const location = {
         type: 'Point',
         coordinates: [latitude, longitude]
     }
     const schedule = { openHour, closeHour }
     Local
-        .findByIdAndUpdate(id, {name, location, schedule, telephone})
+        .findByIdAndUpdate(id, {name, location, schedule, address, telephone})
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 })
