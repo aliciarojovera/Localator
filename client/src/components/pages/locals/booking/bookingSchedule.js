@@ -1,7 +1,8 @@
 import { Component } from 'react'
 import './bookingSchedule.css'
 import BookingService from '../../../../service/booking.service'
-
+import BookingModal from './bookingModal'
+import { Container, Row, Button, Modal } from 'react-bootstrap'
 
 
 class BookingSchedule extends Component {
@@ -14,7 +15,9 @@ class BookingSchedule extends Component {
             bookDate: undefined,
             bookRoom: undefined,
             loggedUser: undefined,
-            books: undefined
+            books: undefined, 
+            showModal: false
+
         }
         this.bookingService = new BookingService()
 
@@ -22,7 +25,6 @@ class BookingSchedule extends Component {
 
     componentDidMount = () => {
         this.setState({ currentDate: new Date(this.props.currentDate), loggedUser: this.props.loggedUser, books:this.props.books}, () => this.getBookingHours())
-                // console.log(this.props)
 
     }
 
@@ -50,7 +52,7 @@ class BookingSchedule extends Component {
         
         }}
         this.setState({ bookingHours: bookingHours })
-   console.log(this.state.local.schedule)
+  
 
     }
 
@@ -66,21 +68,22 @@ class BookingSchedule extends Component {
         console.log(this.state.bookDate)
         this.bookingService
             .newBook(this.state)
+        .then(res=>console.log(res))
     }
 
 
-    // Verifica si la hora (el elemento mapeado en className) está en la reserva, si lo está
-    // Devuelve TRUE, entonces le pone la clase hoursRed, si no la clase Hours
+    // Verifica si la hora (el elemento mapeado en className) está en la reserva, si lo está devuelve TRUE, entonces le pone la clase hoursRed, si no la clase Hours
     isRed = (elm, room) => {
         //Por cada reserva entra en bucle
         for (var i = 0; i < this.state.books.length; i++) {
             let goodDate = new Date(this.state.books[i].date)
-            if (goodDate == elm.toString() && this.state.books[i].room == room) {
+            if (goodDate.toString() === elm.toString() && this.state.books[i].room === room) {
                 //Si la hora y la room es la misma, devuelve True y pinta de rojo
                 return true
             }
         }
     }
+    handleModal = visible => this.setState({ showModal: visible })
 
 
     render() {
@@ -92,7 +95,17 @@ class BookingSchedule extends Component {
                 ?
             <>
                     {this.state.bookingHours.map((elm, idx) =>
+                        <>
                         <div onClick={() => this.book(elm, idx)} className={this.isRed(elm, this.props.sala) ? "hoursRed": "hours"} key={idx}> <p>{elm.getHours()}</p></div>
+                            {/* <div onClick={() => this.handleModal(true)} className={this.isRed(elm, this.props.sala) ? "hoursRed": "hours"} > <p>{elm.getHours()}</p></div>
+
+                   
+                    <Modal show={this.state.showModal} onHide={() => this.handleModal(false)}>
+                    <Modal.Body>
+                        <BookingModal closeModal={() => this.handleModal(false)} updateList={this.refreshCoasters} />
+                    </Modal.Body> */}
+                            {/* </Modal> */}
+                            </>
                     )}
                 </>
                 :null

@@ -13,7 +13,7 @@ class LocalDetails extends Component {
             local: undefined,
             loggedUser: this.props.loggedUser,
             rooms: undefined,
-            books:undefined,
+            books: undefined,
             counter: 1,
             currentDate: undefined,
         }
@@ -40,7 +40,7 @@ class LocalDetails extends Component {
                     let today = new Date()
                     today = today.toString()
                     this.setState({ local: res.data, rooms: res.data.room, currentDate: today }, () => this.findBooks())
-                    
+
                 })
                 .catch(err => console.log(err))
         }
@@ -62,13 +62,13 @@ class LocalDetails extends Component {
 
     findBooks = () => {
         this.bookingService
-                .getBooks(this.state.rooms)
-                .then(res => this.setState({books: res.data}))
-                .catch(err => console.log(err))
-      
+            .getBooks(this.state.rooms)
+            .then(res => this.setState({ books: res.data }))
+            .catch(err => console.log(err))
+
     }
 
-    printBooks=()=> {
+    printBooks = () => {
 
 
     }
@@ -106,7 +106,7 @@ class LocalDetails extends Component {
 
                                         {this.state.local.room.map((elm) =>
                                             <Col key={elm._id}>{elm.name}
-                                                <BookingSchedule sala={elm._id} local={this.state.local} currentDate={this.state.currentDate} loggedUser={this.props.loggedUser} books={this.state.books}/>
+                                                <BookingSchedule sala={elm._id} local={this.state.local} currentDate={this.state.currentDate} loggedUser={this.props.loggedUser} books={this.state.books} />
 
                                             </Col>
 

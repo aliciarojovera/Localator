@@ -9,9 +9,6 @@
     cursor: pointer;
 
 }
-.hours p{
-    margin-bottom: 0rem;
-}
 
 .hoursRed{
     background-color: red;
@@ -25,6 +22,6 @@
 
 }
 
-.hoursRed p{
+div p{
     margin-bottom: 0rem;
 }
