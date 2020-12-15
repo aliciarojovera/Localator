@@ -44,6 +44,22 @@ class Map extends Component {
                         />)
                         :
                         null}
+                    
+
+                    {this.props.local ? 
+                    
+                        <LocalMarker
+                            lat={this.props.local.location.coordinates[0]}
+                            lng={this.props.local.location.coordinates[1]}
+                            text={this.props.local.name}
+                            handleClick={() => this.handleClick(this.props.local)}
+                        />
+                    
+                    : null
+                    
+                    }
+                    
+
                 </GoogleMapReact>
             </div>
         );
