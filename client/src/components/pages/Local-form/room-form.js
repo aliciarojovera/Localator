@@ -11,7 +11,7 @@ class LocalForm extends Component {
 
         this.state = {
             name: '',
-            equipment: '',
+            equipment: [{ 0: "eee" }],
             capacity: '',
             days: [''],
             schedule: '',
@@ -30,6 +30,8 @@ class LocalForm extends Component {
         this.setState({ local: local_id })
     }
 
+
+
     handleSubmit = e => {
 
         e.preventDefault()
@@ -47,6 +49,36 @@ class LocalForm extends Component {
     }
 
 
+
+    // handle input change
+    handleInputChangeEquipment = e => {
+
+        //////PUNTO AQUI
+        const equipment = this.state.equipment
+        equipment[e.target.name][e.target.name] = [e.target.value].toString()
+        console.log(equipment)
+        this.setState({ equipment: equipment })
+    };
+
+    // handle click event of the Remove button
+    handleRemoveClick = index => {
+        const list = this.state.equipment;
+        list.splice(index, 1);
+        this.setState({ equipment: list });
+    };
+
+    // handle click event of the Add button
+    handleAddClick = () => {
+        let add = {}
+        console.log(this.state.equipment.length)
+        add[this.state.equipment.length] = ""
+        let equipment = this.state.equipment
+        equipment.push(add)
+        console.log(equipment)
+        this.setState({ equipment: equipment })
+
+    };
+
     render() {
 
         return (
@@ -62,11 +94,6 @@ class LocalForm extends Component {
                                     <Form.Label>Nombre</Form.Label>
                                     <Form.Control type="text" name="name" value={this.state.name} onChange={this.handleInputChange} />
                                 </Form.Group>
-
-                                <Form.Group controlId="equipment">
-                                    <Form.Label>Equipo</Form.Label>
-                                    <Form.Control type="Text" name="equipment" value={this.state.equipment} onChange={this.handleInputChange} />
-                                </Form.Group>
                                 <Form.Group controlId="capacity">
                                     <Form.Label>Capacity</Form.Label>
                                     <Form.Control type="number" name="capacity" value={this.state.capacity} onChange={this.handleInputChange} />
@@ -75,6 +102,28 @@ class LocalForm extends Component {
                                     <Form.Label>Imagen</Form.Label>
                                     <Form.Control type="text" name="image" value={this.state.image} onChange={this.handleInputChange} />
                                 </Form.Group>
+                                <Form.Group controlId="equipment">
+                                    <Form.Label>Equipmemt</Form.Label>
+                                    {this.state.equipment.map((elm, index) =>
+                                        <Row>
+
+                                            <Col md={{ span: 9, offset: 0 }}>
+                                                <Form.Control type="Text" name={index} value={Object.values(this.state.equipment[index])} onChange={this.handleInputChangeEquipment} />
+                                            </Col>
+                                            <Col md={{ span: 3, offset: 0 }}>
+                                            <div className="btn-box flex">
+                                                <button className="remove"
+
+                                                    onClick={() => this.handleRemoveClick(index)}>Remove</button>
+                                               {this.state.equipment.length-1===index && <button className="Add"
+
+                                                    onClick={() => this.handleAddClick(index)}>Add</button>}
+                                                </div></Col>
+                                        </Row>
+
+                                    )}
+                                </Form.Group>
+
                                 <Form.Group controlId="price">
                                     <Form.Label>Precio por hora</Form.Label>
                                     <Form.Control type="number" name="price" value={this.state.price} onChange={this.handleInputChange} />

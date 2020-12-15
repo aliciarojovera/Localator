@@ -5,3 +5,18 @@ h1{
 body{
 font-family: 'Ubuntu', sans-serif;
 }
+.logout{
+    
+color:rgba(255,255,255,.5);
+padding: .5rem 1rem;
+padding-right: .5rem;
+    padding-left: .5rem;
+}
+.logout:hover {
+        color: rgba(255,255,255,.75);
+}
+
+.navelm:hover {
+        color: rgba(255,255,255,.75);
+
+}

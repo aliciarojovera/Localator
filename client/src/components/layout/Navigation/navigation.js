@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import AuthService from './../../../service/auth.service'
 
 import { Navbar, Nav } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import logo from './cable-jack.png'
 import './navigation.css'
 
@@ -16,7 +16,11 @@ class Navigation extends Component {
     logout = () => {
         this.authService
             .logout()
-            .then(res => this.props.storeUser(undefined))
+            .then(res => {
+                this.props.storeUser(undefined)
+             
+
+            })
             .catch(err => console.log(err))
     }
     render() {
@@ -40,20 +44,20 @@ class Navigation extends Component {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
                         <Link to="/">
-                            <Nav.Link as="div">Inicio</Nav.Link>
+                            <Nav.Link className="navelm" as="div">Inicio</Nav.Link>
                         </Link>
                         <Link to="/locales">
                             <Nav.Link as="div">Locales</Nav.Link>
                         </Link>
                         {this.props.loggedUser ?
-                            <Nav.Link as="div" onClick={this.logout}>Cerrar sesión</Nav.Link>
+                            <Link to="/logout" className="logout" onClick={this.logout}>Cerrar sesión</Link>
                             :
                             <>
                                 <Link to="/registro">
-                                    <Nav.Link as="div">Registro</Nav.Link>
+                                    <Nav.Link className="navelm" as="div">Registro</Nav.Link>
                                 </Link>
                                 <Link to="/inicio-sesion">
-                                    <Nav.Link as="div">Inicio sesión</Nav.Link>
+                                    <Nav.Link className="navelm" as="div">Inicio sesión</Nav.Link>
                                 </Link>
 
                             </>

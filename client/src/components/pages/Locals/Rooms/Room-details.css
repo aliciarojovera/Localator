@@ -1,0 +1,15 @@
+.roomBtn{
+font-size: 15px;
+height: 60px;
+margin-top:5px
+}
+.date{
+    font-size: 20px;
+    padding-top: 5px;
+    line-height: 1.5;
+}
+.imgDetails{
+    height: 200px;
+    width: 350px;
+    object-fit: cover;
+}

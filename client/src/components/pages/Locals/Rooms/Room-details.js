@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import BookingService from '../../../../service/booking.service'
 import BookingSchedule from './../booking/bookingSchedule'
 import LocalService from '../../../../service/local.service'
-
+import './Room-details.css'
 import { Col, Button, Row } from 'react-bootstrap'
 
 
@@ -26,18 +26,16 @@ class RoomDetails extends Component {
     }
 
     componentDidMount = () => {
-        this.bookingService
-            .getBooks(this.props.match.params)
+        this.localService
+            .getRooms(this.props.match.params)
             .then(res => {
-                let today = new Date()
-                today = today.toString()
-                this.setState({ room: res.data[0].room, currentDate: today, books:res.data  }, ()=>this.findLocal() )
-                let fecha = this.state.books[0].date
-                
-                console.log("1", new Date(fecha))
-                console.log("2", this.state.books[0].date)
-                
+                this.setState({room:res.data[0]}, this.findBooks())
+console.log(res)
+
             })
+        console.log(this.state.room)
+        
+
     }
 
     goBack() {
@@ -51,6 +49,19 @@ class RoomDetails extends Component {
                 this.setState({ local: res.data })
             
             })
+    }
+    findBooks=()=>{
+    this.bookingService
+        .getBooks(this.props.match.params)
+        .then(res => {
+            let today = new Date()
+            today = today.toString()
+            this.setState({ currentDate: today, books: res.data }, () => this.findLocal())
+            let fecha = this.state.books[0].date
+
+           
+
+        })
     }
 
     addDay = e => {
@@ -85,20 +96,24 @@ class RoomDetails extends Component {
                 <>
                     
                     <Row>
-                        <Col md={{ span: 3, offset: 1}}>
+                        <Col md={{ span: 5, offset: 1}}>
                     <h1>{this.state.room.name}</h1>
-                    <img src={this.state.room.image}></img>
-                    <h3>Equipo</h3>
-                    {this.state.room.equipment}
+                    <img className="imgDetails" src={this.state.room.image}></img>
+                            <h3>Equipo</h3>
+                            <ul>
+                            {this.state.room.equipment.map(elm=>
+                                <li>{elm}</li>
+
+                            )}</ul>
                     </Col>
 
 
 
-                    <Col md={{ span: 4, offset: 3 }}>
+                    <Col md={{ span: 4, offset: 1 }}>
                     <div className="flexDates">
-                        <Button className="btn btn-dark" onClick={this.restDay}>Día anterior</Button>
+                        <Button className="btn btn-dark roomBtn" onClick={this.restDay}>Día anterior</Button>
                         <h2 className="date">{this.state.currentDate.slice(0, 10)}</h2>
-                        <Button className="btn btn-dark" onClick={this.addDay}>Siguiente día</Button>
+                        <Button className="btn btn-dark roomBtn" onClick={this.addDay}>Siguiente día</Button>
                     </div>
 
                    
@@ -108,7 +123,7 @@ class RoomDetails extends Component {
 
                         </Col> 
 
-                    )
+                    
                 </Row></>
                 :
                 <h1>cargando</h1>

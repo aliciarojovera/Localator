@@ -64,8 +64,10 @@ class BookingSchedule extends Component {
     isInvited = (elm) => {
         for (let i = 0; i < this.state.books.length; i++) {
             let goodDate = new Date(this.state.books[i].date)
-            if (goodDate.toString() === elm.toString()) {
+       
+            if (goodDate.toString() === elm.toString() && (this.props.loggedUser._id === this.props.local.owner || this.props.loggedUser._id === this.state.books[i].owner)) {
                 let invited = this.state.books[i].invited
+                console.log("PASA")
                 return invited
             }
         }
@@ -76,7 +78,6 @@ class BookingSchedule extends Component {
     isRed = (elm) => {
         console.log(this.state.books)
         for (let i = 0; i < this.state.books.length; i++) {
-            console.log("holaaaaa")
             let goodDate = new Date(this.state.books[i].date)
             if (goodDate.toString() === elm.toString()) {
              
