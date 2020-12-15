@@ -100,7 +100,7 @@ class BookingSchedule extends Component {
                     {this.state.bookingHours.map((elm, idx) =>
                         <>
                             {/* <div onClick={() => this.newBook(elm)} className={this.isRed(elm, this.props.room) ? "hoursRed" : "hours"} key={idx}> <p>{elm.getHours()}</p></div> */}
-                            <div onClick={() => this.handleModal(true, elm)} className={this.isRed(elm) ? "hoursRed" : "hours"} > <p>{this.isInvited(elm) ? elm.getHours()+":00  "+ this.isInvited(elm) : elm.getHours()+" : 00"}</p></div>
+                            <div onClick={() => this.handleModal(true, elm)} className={this.isRed(elm) ? "hoursRed" : "hours"} > <p>{this.isInvited(elm) ? elm.getHours()+"  "+ this.isInvited(elm) : elm.getHours()}</p></div>
 
                             
                             <Modal className=" Modal" show={this.state.showModal} onHide={() => this.handleModal(false)}>

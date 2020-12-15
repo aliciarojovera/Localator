@@ -100,7 +100,7 @@ const dayWeek = ["Lun", "Mar","Mie", "Jue", "Vie", "Sáb", "Dom"]
                                     <h2 className="date">{this.state.currentDate.slice(0, 10)}</h2>
                                     <Button className="btn btn-dark" onClick={this.addDay}>Siguiente día</Button>
                                 </div>
-                                <>
+                               
                                     <Row>
 
                                         {this.state.local.room.map((elm) =>
@@ -110,7 +110,7 @@ const dayWeek = ["Lun", "Mar","Mie", "Jue", "Vie", "Sáb", "Dom"]
                                             </Col>
 
                                         )}
-                                    </Row> </>
+                                    </Row> 
                             </>
 
                             :
@@ -119,7 +119,8 @@ const dayWeek = ["Lun", "Mar","Mie", "Jue", "Vie", "Sáb", "Dom"]
 
                                 <Row>
                                     <Col md={{ span: 6, offset: 1 }} >
-                                       
+                                     
+                                   
                                         {/* <h3>Horario</h3>
                                         <div className="flex">
                                             
@@ -128,14 +129,20 @@ const dayWeek = ["Lun", "Mar","Mie", "Jue", "Vie", "Sáb", "Dom"]
                                             <div>
                                             {this.state.local.schedule.closeHour.map(elm => <p>{elm}:00</p>)}</div>
                                         </div> */}
-                                        {this.state.local.room.map((elm) =>
-                                            <Row>
-                                            <Col key={elm._id}>{elm.name} 
-                                                <BookingSchedule room={elm._id} local={this.state.local} currentDate={this.state.currentDate} loggedUser={this.props.loggedUser} books={this.state.books.filter(book => book.room === elm._id)} updateBooks={this.refreshBooks} storeUser={this.props.storeUser} />
+                                        {this.props.loggedUser ?
+                                            <>
+                                                <Row>
 
-                                            </Col></Row>
+                                                    {this.state.local.room.map((elm) =>
+                                                        <Col key={elm._id}>{elm.name}
+                                                            <BookingSchedule room={elm._id} local={this.state.local} currentDate={this.state.currentDate} loggedUser={this.props.loggedUser} books={this.state.books.filter(book => book.room === elm._id)} updateBooks={this.refreshBooks} storeUser={this.props.storeUser} />
 
-                                        )}
+                                                        </Col>
+
+                                                    )}
+                                                </Row> </>
+                                            :
+                                            <Button>Reserva</Button>}
                                         <hr />
 
                                         <Button onClick={this.goBack} className="btn btn-dark btn-block btn-sm">Go Back</Button>
