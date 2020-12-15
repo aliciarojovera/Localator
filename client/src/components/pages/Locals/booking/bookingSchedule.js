@@ -18,7 +18,8 @@ class BookingSchedule extends Component {
             books: undefined,
             showModal: false,
             name: undefined,
-            invited: undefined
+            invited: undefined,
+            books:this.props.books
 
         }
         this.bookingService = new BookingService()
@@ -27,7 +28,7 @@ class BookingSchedule extends Component {
 
     componentDidMount = () => {
         this.setState({ currentDate: new Date(this.props.currentDate), loggedUser: this.props.loggedUser, books: this.props.books }, () => this.getBookingHours())
-
+   console.log(this.props)
     }
 
 
@@ -63,7 +64,6 @@ class BookingSchedule extends Component {
     isInvited = (elm) => {
         for (let i = 0; i < this.state.books.length; i++) {
             let goodDate = new Date(this.state.books[i].date)
-            // console.log(this.state.books[i].invited)
             if (goodDate.toString() === elm.toString()) {
                 let invited = this.state.books[i].invited
                 return invited
@@ -74,13 +74,12 @@ class BookingSchedule extends Component {
 
 
     isRed = (elm) => {
+        console.log(this.state.books)
         for (let i = 0; i < this.state.books.length; i++) {
+            console.log("holaaaaa")
             let goodDate = new Date(this.state.books[i].date)
-            // console.log(this.state.books[i].invited)
             if (goodDate.toString() === elm.toString()) {
-                let state = true
-                let invited = this.state.books[i].invited
-                let result = { state: state, invited: invited}
+             
                 return true
             }
         }
@@ -105,7 +104,8 @@ class BookingSchedule extends Component {
                             
                             <Modal className=" Modal" show={this.state.showModal} onHide={() => this.handleModal(false)}>
                                 <Modal.Body>
-                                    <BookingModal closeModal={() => this.handleModal(false)} date={this.state.bookDate} room={this.props.room} owner={this.props.loggedUser._id} updateBooks={this.props.updateBooks} rooms={this.state.local.room} storeUser={this.props.storeUser} />
+                                    <BookingModal closeModal={() => this.handleModal(false)} date={this.state.bookDate} room={this.props.room} schedule={this.props.local.schedule}
+                                        books={this.state.books} owner={this.props.loggedUser._id} updateBooks={this.props.updateBooks} rooms={this.state.local.room} storeUser={this.props.storeUser} />
                                 </Modal.Body>
                             </Modal>
                         </>

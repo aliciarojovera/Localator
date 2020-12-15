@@ -10,26 +10,23 @@ class Map extends Component {
                 lat: 40.42380022443293,
                 lng: -3.7113449216902583
             },
-            zoom: 12,
+            zoom: 13,
+            height:"400px"
         }
     }
 
-    handleClick = elm => {
-        console.log('Soy handleClick:', elm)
-        this.setState({
-            center: {
-                lat: elm.location.coordinates[0],
-                lng: elm.location.coordinates[1]
-            },
-            zoom: 16
-        })
-    }
+    componentDidMount=()=>{
+    
+        if (this.props.local) {
+            this.setState({center: { lat: this.props.local.location.coordinates[0], lng: this.props.local.location.coordinates[1]}, zoom:17, height: "300px"})
+        }
+ }
 
     render() {
 
         return (
 
-            <div style={{ height: '400px', width: '100%' }}>
+            <div style={{ height: this.state.height, width: '100%' }}>
                 <GoogleMapReact
                     center={this.state.center}
                     zoom={this.state.zoom}

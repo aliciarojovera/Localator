@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import LocalsService from './../../../service/local.service'
+import LocalsService from '../../../service/local.service'
 import { Link } from 'react-router-dom'
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Container, Row, Col, Button, Card } from 'react-bootstrap'
 import './local-details.css'
 import BookingSchedule from './booking/bookingSchedule'
-import BookingService from './../../../service/booking.service'
+import BookingService from '../../../service/booking.service'
 import Map from "../Maps/Map"
 
 
@@ -84,7 +84,7 @@ class LocalDetails extends Component {
 
 
     render() {
-const dayWeek = ["Lun", "Mar","Mie", "Jue", "Vie", "Sáb", "Dom"]
+        const dayWeek = ["Lun", "Mar", "Mie", "Jue", "Vie", "Sáb", "Dom"]
         return (
             <Container className="local-details center">
                 {this.state.local && this.state.books
@@ -100,17 +100,17 @@ const dayWeek = ["Lun", "Mar","Mie", "Jue", "Vie", "Sáb", "Dom"]
                                     <h2 className="date">{this.state.currentDate.slice(0, 10)}</h2>
                                     <Button className="btn btn-dark" onClick={this.addDay}>Siguiente día</Button>
                                 </div>
-                               
-                                    <Row>
 
-                                        {this.state.local.room.map((elm) =>
-                                            <Col key={elm._id}>{elm.name}
-                                                <BookingSchedule room={elm._id} local={this.state.local} currentDate={this.state.currentDate} loggedUser={this.props.loggedUser} books={this.state.books.filter(book => book.room === elm._id)} updateBooks={this.refreshBooks} storeUser={this.props.storeUser} />
+                                <Row>
 
-                                            </Col>
+                                    {this.state.local.room.map((elm) =>
+                                        <Col key={elm._id}>{elm.name}
+                                            <BookingSchedule room={elm._id} local={this.state.local} currentDate={this.state.currentDate} loggedUser={this.props.loggedUser} books={this.state.books.filter(book => book.room === elm._id)} updateBooks={this.refreshBooks} storeUser={this.props.storeUser} />
 
-                                        )}
-                                    </Row> 
+                                        </Col>
+
+                                    )}
+                                </Row>
                             </>
 
                             :
@@ -119,40 +119,45 @@ const dayWeek = ["Lun", "Mar","Mie", "Jue", "Vie", "Sáb", "Dom"]
 
                                 <Row>
                                     <Col md={{ span: 6, offset: 1 }} >
-                                     
-                                   
-                                        {/* <h3>Horario</h3>
+                                        <h3>Teléfono</h3>
+                                        <p>{this.state.local.telephone}</p>
+                                        <h3>Horario</h3>
                                         <div className="flex">
-                                            
+
                                             <div>
                                                 {this.state.local.schedule.openHour.map((elm, idx) => <p>{dayWeek[idx]}  {elm}:00 -</p>)}</div>
                                             <div>
-                                            {this.state.local.schedule.closeHour.map(elm => <p>{elm}:00</p>)}</div>
-                                        </div> */}
+                                                {this.state.local.schedule.closeHour.map(elm => <p>{elm}:00</p>)}</div>
+                                        </div></Col>
+                                    <Col md={5}>
+
+                                        <Map local={this.state.local} zoom={20} />
+                                    </Col>
+                                </Row>
                                         {this.props.loggedUser ?
                                             <>
-                                                <Row>
+                                            <div className= "flexCards">
+                                                {this.state.local.room.map((elm) =>
 
-                                                    {this.state.local.room.map((elm) =>
-                                                        <Col key={elm._id}>{elm.name}
-                                                            <BookingSchedule room={elm._id} local={this.state.local} currentDate={this.state.currentDate} loggedUser={this.props.loggedUser} books={this.state.books.filter(book => book.room === elm._id)} updateBooks={this.refreshBooks} storeUser={this.props.storeUser} />
+                                                        <Card style={{ width: '18rem' }}>
+                                                            <Card.Body>
+                                                                <Card.Title>{elm.name}</Card.Title>
+                                                                <Card.Img variant="top" src={elm.image} className="imageCard"/>
 
-                                                        </Col>
+                                                            <Link to={`/sala/${elm._id}`} >Ver detalles y reservar</Link>
+                                                                <Card.Text>{elm.price}€/h</Card.Text>
+                                                            </Card.Body>
+                                                        </Card>
 
-                                                    )}
-                                                </Row> </>
+                                                )}</div></>
                                             :
-                                            <Button>Reserva</Button>}
+                                            <Button>Ver salas y reservar</Button>}
                                         <hr />
 
                                         <Button onClick={this.goBack} className="btn btn-dark btn-block btn-sm">Go Back</Button>
 
-                                    </Col>
-                                    <Col md={5}>
-
-                                        <Map local={this.state.local} />
-                                    </Col>
-                                </Row></>}
+                                    
+                                 </>}
                     </>
                     :
                     <h1>Cargando</h1>

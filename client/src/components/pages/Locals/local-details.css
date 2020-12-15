@@ -10,4 +10,14 @@
 }
 .flex{
     display: flex;
+justify-content: center;}
+
+.flexCards{
+    display: flex;
+justify-content: space-around;
+margin: 20px 0 
+}
+.imageCard{
+height: 150px;
+object-fit: cover;
 }

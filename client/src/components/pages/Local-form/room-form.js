@@ -6,16 +6,18 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 class LocalForm extends Component {
 
     constructor(props) {
-        
+
         super(props)
-        
+
         this.state = {
             name: '',
             equipment: '',
             capacity: '',
             days: [''],
             schedule: '',
-            local:''
+            local: '',
+            image: '',
+            price: ''
 
         }
         this.localService = new localService()
@@ -25,28 +27,28 @@ class LocalForm extends Component {
     handleInputChange = e => {
         const local_id = this.props.match.params.localId
         this.setState({ [e.target.name]: e.target.value })
-        this.setState({local:local_id})
+        this.setState({ local: local_id })
     }
 
     handleSubmit = e => {
 
         e.preventDefault()
-     
-     
-            this.localService
-                .newRoom(this.state)
-                .then(res => {
-                    console.log(res)
-                    this.props.history.push(`/local/${this.state.local}`)
 
-                })
-                .catch(err => console.log('Ha habido un error', err))
-        
+
+        this.localService
+            .newRoom(this.state)
+            .then(res => {
+                console.log(res)
+                this.props.history.push(`/local/${this.state.local}`)
+
+            })
+            .catch(err => console.log('Ha habido un error', err))
+
     }
 
-  
+
     render() {
-      
+
         return (
             <>
                 <Container>
@@ -69,8 +71,15 @@ class LocalForm extends Component {
                                     <Form.Label>Capacity</Form.Label>
                                     <Form.Control type="number" name="capacity" value={this.state.capacity} onChange={this.handleInputChange} />
                                 </Form.Group>
-                             
-                            
+                                <Form.Group controlId="image">
+                                    <Form.Label>Imagen</Form.Label>
+                                    <Form.Control type="text" name="image" value={this.state.image} onChange={this.handleInputChange} />
+                                </Form.Group>
+                                <Form.Group controlId="price">
+                                    <Form.Label>Precio por hora</Form.Label>
+                                    <Form.Control type="number" name="price" value={this.state.price} onChange={this.handleInputChange} />
+                                </Form.Group>
+
                                 <br>
 
                                 </br>

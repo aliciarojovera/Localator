@@ -46,11 +46,11 @@ router.post('/new-local', (req, res) => {
 router.post('/new-room/', (req, res) => {
 
 
-    const { name, equipment, capacity, local } = req.body
+    const { name, equipment, capacity, local, price, image } = req.body
 
     Room
 
-        .create({ name, equipment, capacity, local })
+        .create({ name, equipment, capacity, local, price, image})
 
         .then(response => {
 
