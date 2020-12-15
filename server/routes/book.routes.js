@@ -20,16 +20,18 @@ router.post('/findBooks', (req, res) => {
 })
 
 router.post('/newBook', (req, res) => {
-    const { room, owner, date } = req.body
+    const { room, owner, date, name } = req.body
+    console.log(req.body)
     console.log(req.body)
 
     Reservation
-        .create({ room, owner, date })
+        .create({ room, owner, date, invited: name })
         .then(res => {
+            console.log(res)
             const userPromise = User.findByIdAndUpdate(res.owner, { $push: { reservation: res._id } }, { new: true })
             const roomPromise = Room.findByIdAndUpdate(res.room, { $push: { reservation: res._id } }, { new: true })
             return Promise.all([userPromise, roomPromise])
-         
+
 
         })
         .then(response => res.json(response[0]))

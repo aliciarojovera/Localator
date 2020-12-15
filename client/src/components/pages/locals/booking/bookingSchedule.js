@@ -16,7 +16,9 @@ class BookingSchedule extends Component {
             bookRoom: undefined,
             loggedUser: undefined,
             books: undefined,
-            showModal: false
+            showModal: false,
+            name: undefined,
+            invited: undefined
 
         }
         this.bookingService = new BookingService()
@@ -58,11 +60,27 @@ class BookingSchedule extends Component {
     }
 
 
-
-    isRed = (elm, room) => {
+    isInvited = (elm) => {
         for (let i = 0; i < this.state.books.length; i++) {
             let goodDate = new Date(this.state.books[i].date)
-            if (goodDate.toString() === elm.toString() ) {
+            // console.log(this.state.books[i].invited)
+            if (goodDate.toString() === elm.toString()) {
+                let invited = this.state.books[i].invited
+                return invited
+            }
+        }
+    }
+
+
+
+    isRed = (elm) => {
+        for (let i = 0; i < this.state.books.length; i++) {
+            let goodDate = new Date(this.state.books[i].date)
+            // console.log(this.state.books[i].invited)
+            if (goodDate.toString() === elm.toString()) {
+                let state = true
+                let invited = this.state.books[i].invited
+                let result = { state: state, invited: invited}
                 return true
             }
         }
@@ -82,7 +100,7 @@ class BookingSchedule extends Component {
                     {this.state.bookingHours.map((elm, idx) =>
                         <>
                             {/* <div onClick={() => this.newBook(elm)} className={this.isRed(elm, this.props.room) ? "hoursRed" : "hours"} key={idx}> <p>{elm.getHours()}</p></div> */}
-                            <div onClick={() => this.handleModal(true, elm)} className={this.isRed(elm, this.props.room) ? "hoursRed" : "hours"} > <p>{elm.getHours()}</p></div>
+                            <div onClick={() => this.handleModal(true, elm)} className={this.isRed(elm) ? "hoursRed" : "hours"} > <p>{this.isInvited(elm) ? this.isInvited(elm) : elm.getHours()}</p></div>
 
                             
                             <Modal className=" Modal" show={this.state.showModal} onHide={() => this.handleModal(false)}>
