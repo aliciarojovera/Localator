@@ -26,8 +26,16 @@ class BookingForm extends Component {
 
     componentDidMount = () => {
 
-        let rooms = this.props.rooms.filter(elm => elm._id === this.state.room)
+        console.log(this.props)
+        if (this.props.room) {
+             this.setState({ bookRoom: this.props.room })
+        }
+        else {
+              let rooms = this.props.rooms.filter(elm => elm._id === this.state.room)
         this.setState({ bookRoom: rooms })
+
+        }
+      
         this.getDate(this.state.date, this.props.books)
     }
 
@@ -45,8 +53,7 @@ class BookingForm extends Component {
         const owner = this.state.owner
         const name = this.state.name
         for (let i = 0; i < numberHours; i++) {
-            console.log('IRTERANDOOOOOOOOO')
-            console.log(copyDate)
+           
             let date = new Date(copyDate)
             this.bookingService
                 .newBook({ room, owner, date, name })
@@ -60,10 +67,8 @@ class BookingForm extends Component {
         }
     }
 
-    //=====> RESERVA <=====
 
-    // Devuelve el día que es en formato número
-    procDay = (date) => {
+    dayWeek = (date) => {
         if (date.getDay() === 0) {
             return 6
         } else {
@@ -71,9 +76,8 @@ class BookingForm extends Component {
         }
     }
 
-    // Checkea si hay alguna reserva después de la que voy a hacer
+    // comprueba si hay alguna reserva después de la que voy a hacer
     checkReh = (books, myHour, myDate) => {
-        console.log('BOOKS', books)
         for (let i = 0; i < books.length; i++) {
             let bookHour = new Date(books[i].date).getHours()
             if (new Date(books[i].date).getDate() === new Date(myDate).getDate() && bookHour > myHour) {
@@ -83,30 +87,30 @@ class BookingForm extends Component {
         }
     }
 
-    // Procedimiento principal, setea chanceHours, las horas que puedo ensayar
+    //  horas que puedo ensayar
     getDate = (date, books) => {
         let myDate = date
-        let myDay = this.procDay(date)
+        let myDay = this.dayWeek(date)
         let myHour = date.getHours()
         let todayClose = this.props.schedule.closeHour[myDay]
-        let nextReh = this.checkReh(books, myHour, myDate)
+        let nextBook = this.checkReh(books, myHour, myDate)
         let chanceHours = null
-        if (nextReh) {
-            chanceHours = nextReh
+        if (nextBook) {
+            chanceHours = nextBook
         } else {
             chanceHours = todayClose - this.state.date.getHours()
         }
         this.setState({ chanceHours: chanceHours })
     }
 
-    // Crea una opción por cada elemento de un array de chanceHours
+    // Crea una opción por cada elemento de un array de horas disponibles
     pushOne = number => {
         return (
             <option key={number} value={number}>{number} horas </option>
         )
     }
 
-    // Procedimiento que pinta todas las opciones en un array para entregar al JSX
+    // Procedimiento que pinta todas las opciones en un array 
     createOptions = () => {
         let myResult = []
         for (let i = 1; i < this.state.chanceHours + 1; i++) {
@@ -114,7 +118,6 @@ class BookingForm extends Component {
         }
         return myResult
     }
-    //=====> RESERVA <=====
 
     render() {
         return (

@@ -23,13 +23,16 @@ const userSchema = new Schema({
         type: Number,
         require: true
     },
-    members: [{
-        name: {
-            type: String
-        },
-        email: {
-            type: String
-        }
+        members: [{
+            memberName: {
+                type: String
+            },
+            memberMail: {
+                type: String
+            },
+            id: {
+                type: String
+            }
     }],
     reservation: [{
         type: Schema.Types.ObjectId,

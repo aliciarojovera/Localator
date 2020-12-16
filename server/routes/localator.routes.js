@@ -49,9 +49,8 @@ router.post('/new-room/', (req, res) => {
 
     const { name, equipment, capacity, local, price, image } = req.body
 
-    equipmentList = []
+    const equipmentList = []
     equipment.map((elm, index) => {
-        console.log(Object.values(elm)[0])
         if (Object.values(elm)[0] !== '') {
             equipmentList.push(Object.values(elm)[0])
         }
@@ -59,27 +58,47 @@ router.post('/new-room/', (req, res) => {
 
     Room
 
-        .create({ name, equipment:equipmentList, capacity, local, price, image })
+        .create({ name, equipment: equipmentList, capacity, local, price, image })
 
         .then(response => {
 
             res.json(response)
             Local
                 .findByIdAndUpdate(local, { $push: { room: response._id } })
-                .then(res => console.log(res))
         })
         .catch(err => res.status(500).json(err))
 })
 
+router.post('/edit-room', (req, res) => {
+
+    const { id, equipment, name, price } = req.body
+    const equipmentList = []
+    equipment.map((elm, index) => {
+        if (Object.values(elm)[0] !== '') {
+            equipmentList.push(Object.values(elm)[0])
+        }
+    })
+
+
+    console.log(equipmentList)
+    Room
+        .findByIdAndUpdate(id, { name, price, equipment: equipmentList }, {new:true})
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json(err))
+
+})
 
 router.post('/getRooms', (req, res) => {
     const rooms = req.body.salaId
-    console.log("=================", req.body)
 
 
     Room
         .find({ _id: { $in: rooms } })
-        .then(response => res.json(response))
+        .populate('reservation')
+        .populate('local')
+        .then(response => {
+            res.json(response)
+        })
         .catch(err => res.status(500).json(err))
 
 })

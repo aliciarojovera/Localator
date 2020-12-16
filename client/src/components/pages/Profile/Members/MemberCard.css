@@ -1,0 +1,11 @@
+.formCard {
+    border: 1px solid rgba(138, 138, 138, 0.534);
+    border-radius: 5px;
+    padding: 10px;
+    margin-top:10px
+}
+
+.miembreTitle {
+    text-align: center;
+    font-weight: bold;
+}

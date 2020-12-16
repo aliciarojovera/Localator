@@ -70,7 +70,6 @@ class LocalForm extends Component {
     // handle click event of the Add button
     handleAddClick = () => {
         let add = {}
-        console.log(this.state.equipment.length)
         add[this.state.equipment.length] = ""
         let equipment = this.state.equipment
         equipment.push(add)

@@ -2,7 +2,7 @@
 import { Component } from 'react'
 import { Container } from 'react-bootstrap'
 import BookingService from './../../../service/booking.service'
-
+import MemberForm from './Members/MemberForm'
 
 class ProfileUser extends Component {
 
@@ -30,6 +30,8 @@ class ProfileUser extends Component {
         return (
             <Container>
                 <h1>¡Bienvenid@, {this.state.loggedUser.username}!</h1>
+
+                <MemberForm user={this.state.loggedUser} storeUser={this.props.storeUser} />
 
                 <h2>Tus reservas</h2>
                 {this.state.books

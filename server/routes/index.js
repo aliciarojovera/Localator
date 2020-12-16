@@ -5,4 +5,5 @@ module.exports = app => {
     app.use('/api', require('./auth.routes'))
     app.use('/api/local', require('./localator.routes'))
     app.use('/api/books', require('./book.routes'))
+    app.use('/api/profile', require('./profile.routes'))
 }

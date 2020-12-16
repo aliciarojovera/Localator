@@ -26,15 +26,15 @@ class RoomDetails extends Component {
     }
 
     componentDidMount = () => {
+        let today = new Date()
+        today = today.toString()
         this.localService
             .getRooms(this.props.match.params)
             .then(res => {
-                this.setState({room:res.data[0]}, this.findBooks())
-console.log(res)
+                this.setState({room:res.data[0], books:res.data[0].reservation, local:res.data[0].local, currentDate:today})
 
             })
-        console.log(this.state.room)
-        
+        .catch(err=>console.log(err))
 
     }
 
@@ -49,6 +49,8 @@ console.log(res)
                 this.setState({ local: res.data })
             
             })
+            .catch(err => console.log(err))
+
     }
     findBooks=()=>{
     this.bookingService
@@ -62,6 +64,8 @@ console.log(res)
            
 
         })
+            .catch(err => console.log(err))
+
     }
 
     addDay = e => {
