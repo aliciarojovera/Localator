@@ -1,8 +1,9 @@
 
 import { Component } from 'react'
-import { Container } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import BookingService from './../../../service/booking.service'
 import MemberForm from './Members/MemberForm'
+import UserBook from './UserBooks/UserBook'
 
 class ProfileUser extends Component {
 
@@ -34,18 +35,20 @@ class ProfileUser extends Component {
                 <MemberForm user={this.state.loggedUser} storeUser={this.props.storeUser} />
 
                 <h2>Tus reservas</h2>
+
+
                 {this.state.books
-                
                     ?
-            
-                        this.state.books.map(elm =>
-                      <div>
-                                <p>{new Date(elm.date).getHours()} / {new Date(elm.date).getMonth() + 1} / {new Date(elm.date).getFullYear()}</p>
-                        </div>
-                        )
+                    <>
+                        <Row>
+                            <Col sm={{ span: 6 }}><h4>Pasadas</h4></Col>
+                            <Col sm={{ span: 6 }}><h4>Futuras</h4></Col>
+                        </Row>
+                        <UserBook books={this.state.books} />
+                    </>
                     :
                     <h1>cargando</h1>
-   }
+                }
             </Container>
         )
     }

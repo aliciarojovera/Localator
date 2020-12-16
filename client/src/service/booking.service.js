@@ -12,4 +12,5 @@ export default class BookingService {
     getBooks= roomsId => this.apiHandler.post('/findBooks', roomsId)
     newBook = bookInfo => this.apiHandler.post('/newBook', bookInfo)
     findBooks = booksId => this.apiHandler.post('/findBooksById', booksId)
+    deleteBook = bookInfo => this.apiHandler.post('/deleteBook', bookInfo)
 }

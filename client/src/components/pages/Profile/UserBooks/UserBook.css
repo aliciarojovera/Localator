@@ -1,0 +1,32 @@
+.futureBooks {
+    text-align: center;
+    width: fit-content;
+}
+
+.pastBooks {
+    text-align: center;
+    width: fit-content;
+}
+
+.futureBooks .bookDay{
+    background-color: rgba(0, 128, 0, 0.274);
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+    margin:2px;
+    display:flex
+}
+
+.pastBooks .bookDay{
+    background-color: rgba(173, 173, 173, 0.151);
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+    margin:2px;
+    display:flex
+}
+
+.bookHour {
+    font-size: 15px;
+    padding-left: 10px;
+}

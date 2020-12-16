@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import localService from '../../../service/local.service'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import FilesService from '../../../service/upload.service'
 
 
-class LocalForm extends Component {
+class RoomForm extends Component {
 
     constructor(props) {
 
@@ -11,7 +12,7 @@ class LocalForm extends Component {
 
         this.state = {
             name: '',
-            equipment: [{ 0: "eee" }],
+            equipment: [{ 0: "" }],
             capacity: '',
             days: [''],
             schedule: '',
@@ -21,7 +22,7 @@ class LocalForm extends Component {
 
         }
         this.localService = new localService()
-
+        this.filesService = new FilesService()
     }
 
     handleInputChange = e => {
@@ -49,8 +50,28 @@ class LocalForm extends Component {
     }
 
 
+    handleImageUpload = e => {
 
-    // handle input change
+        const uploadData = new FormData()
+        uploadData.append('image', e.target.files[0])
+        // console.log('ESTO ES UNA IMAGEN EN MEMORIA:', e.target.files[0])
+
+        // this.setState({ uploadingActive: true })
+
+        this.filesService
+            .uploadImage(uploadData)
+            .then(response => {
+                this.setState({ image: response.data.secure_url, uploadingActive: false })
+
+                console.log(response)
+            })
+            
+            .catch(err => console.log('ERRORRR!', err))
+      
+           
+    }
+
+
     handleInputChangeEquipment = e => {
 
         //////PUNTO AQUI
@@ -97,12 +118,16 @@ class LocalForm extends Component {
                                     <Form.Label>Capacity</Form.Label>
                                     <Form.Control type="number" name="capacity" value={this.state.capacity} onChange={this.handleInputChange} />
                                 </Form.Group>
-                                <Form.Group controlId="image">
+                                {/* <Form.Group controlId="image">
                                     <Form.Label>Imagen</Form.Label>
                                     <Form.Control type="text" name="image" value={this.state.image} onChange={this.handleInputChange} />
+                                </Form.Group> */}
+                                <Form.Group controlId="image">
+                                    <Form.Label>Imagen (archivo)</Form.Label>
+                                    <Form.Control type="file" onChange={this.handleImageUpload} />
                                 </Form.Group>
                                 <Form.Group controlId="equipment">
-                                    <Form.Label>Equipmemt</Form.Label>
+                                    <Form.Label>Equipment</Form.Label>
                                     {this.state.equipment.map((elm, index) =>
                                         <Row>
 
@@ -110,13 +135,13 @@ class LocalForm extends Component {
                                                 <Form.Control type="Text" name={index} value={Object.values(this.state.equipment[index])} onChange={this.handleInputChangeEquipment} />
                                             </Col>
                                             <Col md={{ span: 3, offset: 0 }}>
-                                            <div className="btn-box flex">
-                                                <button className="remove"
+                                                <div className="btn-box flex">
+                                                    <button className="remove"
 
-                                                    onClick={() => this.handleRemoveClick(index)}>Remove</button>
-                                               {this.state.equipment.length-1===index && <button className="Add"
+                                                        onClick={() => this.handleRemoveClick(index)}>Remove</button>
+                                                    {this.state.equipment.length - 1 === index && <button className="Add"
 
-                                                    onClick={() => this.handleAddClick(index)}>Add</button>}
+                                                        onClick={() => this.handleAddClick(index)}>Add</button>}
                                                 </div></Col>
                                         </Row>
 
@@ -142,4 +167,4 @@ class LocalForm extends Component {
     }
 }
 
-export default LocalForm
+export default RoomForm

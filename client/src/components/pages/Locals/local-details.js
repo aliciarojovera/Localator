@@ -105,7 +105,7 @@ class LocalDetails extends Component {
 
                                     {this.state.local.room.map((elm) =>
                                         <Col key={elm._id}>{elm.name}
-                                            <BookingSchedule room={elm._id} local={this.state.local} currentDate={this.state.currentDate} loggedUser={this.props.loggedUser} books={this.state.books.filter(book => book.room === elm._id)} updateBooks={this.refreshBooks} storeUser={this.props.storeUser} />
+                                            <BookingSchedule room={elm._id} nameRoom={elm.name} local={this.state.local} currentDate={this.state.currentDate} loggedUser={this.props.loggedUser} books={this.state.books.filter(book => book.room === elm._id)} updateBooks={this.refreshBooks} storeUser={this.props.storeUser} />
                                             <Link className="btn btn-dark btn-block btn-sm" to={`/editar-sala/${elm._id}`}> Editar sala </Link>
                                             <Link className="btn btn-dark btn-block btn-sm" to={`/sala/${elm._id}`}> Ver sala </Link>
 

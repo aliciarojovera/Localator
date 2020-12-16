@@ -10,7 +10,6 @@ router.post('/signup-owner', (req, res) => {
 
     const { username, password, email, telephone} = req.body
     const role = "OWNER"
-    console.log(role)
     if (!username || !password || !email || !telephone) {
         res.status(400).json({ message: 'Rellena todos los campos' })
         return

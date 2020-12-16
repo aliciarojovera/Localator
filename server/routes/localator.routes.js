@@ -65,6 +65,11 @@ router.post('/new-room/', (req, res) => {
             res.json(response)
             Local
                 .findByIdAndUpdate(local, { $push: { room: response._id } })
+                .then(response2 => {
+                    res.json(response2)
+                   
+
+                })
         })
         .catch(err => res.status(500).json(err))
 })
@@ -80,9 +85,8 @@ router.post('/edit-room', (req, res) => {
     })
 
 
-    console.log(equipmentList)
     Room
-        .findByIdAndUpdate(id, { name, price, equipment: equipmentList }, {new:true})
+        .findByIdAndUpdate(id, { name, price, equipment: equipmentList }, { new: true })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 
@@ -107,7 +111,6 @@ router.post('/getRooms', (req, res) => {
 
 
 router.post('/edit-local', (req, res) => {
-    console.log(req.body)
     const { id, name, latitude, longitude, closeHour, openHour, address, telephone } = req.body
     const location = {
         type: 'Point',

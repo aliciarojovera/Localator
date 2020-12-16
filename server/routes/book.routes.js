@@ -39,13 +39,11 @@ router.post('/findBooks', (req, res) => {
 
 router.post('/newBook', (req, res) => {
     const { room, owner, date, name } = req.body
-    console.log(req.body)
-    console.log(req.body)
+   
 
     Reservation
         .create({ room, owner, date, invited: name })
         .then(res => {
-            console.log(res)
             const userPromise = User.findByIdAndUpdate(res.owner, { $push: { reservation: res._id } }, { new: true })
             const roomPromise = Room.findByIdAndUpdate(res.room, { $push: { reservation: res._id } }, { new: true })
             return Promise.all([userPromise, roomPromise])
@@ -57,7 +55,29 @@ router.post('/newBook', (req, res) => {
 
 })
 
+router.post('/deleteBook', (req, response) => {
+    const userId = req.body[0]
+    const date = req.body[1]
+    const roomId = req.body[2]
 
+    Reservation
+        .find({ date: date, room: roomId })
+        .then(ros => {
+            Reservation.deleteMany({ date: date, room: roomId })
+                .then(res => {
+                    Room.findByIdAndUpdate(roomId, { $pull: { reservation: ros[0]._id } }, { new: true })
+                        .then(ris => {
+                            User.findByIdAndUpdate(userId, { $pull: { reservation: ros[0]._id } }, { new: true })
+                                .then(rus => {
+                                    response.json(ris)
+                                })
+                        })
+                })
+                .catch(err => {
+                    res.status(500).json(err)
+                })
+        })
+})
 
 
 

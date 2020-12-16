@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import BookingService from './../../../../service/booking.service'
+import EmailService from './../../../../service/email.service'
 
 import { Form, Button } from 'react-bootstrap'
 
@@ -15,18 +16,16 @@ class BookingForm extends Component {
             room: this.props.room,
             date: this.props.date,
             bookRoom: undefined,
-            name: undefined
-            // =====> RESERVA <======
-            ,
+            name: undefined ,
             chanceHours: undefined,
             numberHours: 1
         }
         this.bookingService = new BookingService()
+        this.EmailService= new EmailService()
     }
 
     componentDidMount = () => {
 
-        console.log(this.props)
         if (this.props.room) {
              this.setState({ bookRoom: this.props.room })
         }
@@ -51,7 +50,14 @@ class BookingForm extends Component {
         const numberHours = this.state.numberHours
         const room = this.state.room
         const owner = this.state.owner
-        const name = this.state.name
+        let name = ""
+        const emailData = [this.props.nameRoom, this.state.date.getHours(), this.state.date.getDate(), this.state.date.getMonth() + 1 ,this.state.date.getFullYear(), this.props.loggedUser.members ]
+        if (this.props.loggedUser._id === this.props.localOwner) {
+            name=this.state.name
+        }
+        else {
+            name=this.props.loggedUser.username
+        }
         for (let i = 0; i < numberHours; i++) {
            
             let date = new Date(copyDate)
@@ -61,7 +67,10 @@ class BookingForm extends Component {
                     this.props.storeUser(res.data)
                     this.props.updateBooks()
                     this.props.closeModal()
+                    this.EmailService
+                    .sendEmail(emailData)
                 })
+                
                 .catch(err => console.log(err))
             copyDate = new Date(copyDate.setTime(copyDate.getTime() + (1 * 60 * 60 * 1000)))
         }
@@ -131,7 +140,7 @@ class BookingForm extends Component {
                             <Form.Group controlId="room">
                                 <Form.Label>Sala:</Form.Label>
                                 <br />
-                                <Form.Label>{this.state.bookRoom[0].name}</Form.Label>
+                                <Form.Label>{this.props.nameRoom}</Form.Label>
                             </Form.Group>
                             <Form.Group controlId="hours">
                                 <Form.Label>Hora:</Form.Label>
@@ -153,10 +162,19 @@ class BookingForm extends Component {
                                 <br />
                                 <Form.Label>{this.state.date.getDate()} / {this.state.date.getMonth() + 1} / {this.state.date.getFullYear()}</Form.Label>
                             </Form.Group>
+                            {this.props.loggedUser._id===this.props.localOwner ? 
                             <Form.Group controlId="name">
                                 <Form.Label>Nombre</Form.Label>
-                                <Form.Control type="text" name="name" value={this.state.name} onChange={this.handleInputChange} />
-                            </Form.Group>
+                                <Form.Control type="text" name="name" value={this.state.name} onChange={this.handleInputChange} placeholder=""/>
+                                </Form.Group>
+                            
+                                :
+                                <Form.Group controlId="name">
+                                 <Form.Label>Nombre: </Form.Label><br/>
+                            <Form.Label>{this.props.loggedUser.username}</Form.Label>
+                                  </Form.Group>
+
+                            }
 
                             <Button variant="dark" type="submit">Confirmar reserva</Button>
                         </Form>

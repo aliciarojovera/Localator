@@ -7,8 +7,7 @@ router.post('/updateMembers', (req, res) => {
     const myBody = req.body
     const members = myBody[0]
     const user = myBody[1]
-    console.log('this is the user: ', user._id)
-    console.log('this are the members: ', members)
+
     User
         .findByIdAndUpdate(user._id, { members }, { new: true })
         .then(resp => res.json(resp))

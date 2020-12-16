@@ -22,6 +22,18 @@
 
 }
 
+.hoursGrey{
+    background-color: gray;
+    margin-bottom: 0rem;
+    margin-bottom:5px;
+    padding:3px 0;
+    color:white;
+    align-items: center;
+    align-content: center;
+    cursor: pointer;
+
+}
+
 div p{
     margin-bottom: 0rem;
 }

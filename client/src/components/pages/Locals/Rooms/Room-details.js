@@ -122,8 +122,7 @@ class RoomDetails extends Component {
 
                    
                         
-                    {this.state.room.name}
-                            <BookingSchedule room={this.state.room._id} local={this.state.local} currentDate={this.state.currentDate} loggedUser={this.props.loggedUser} books={this.state.books} updateBooks={this.refreshBooks} storeUser={this.props.storeUser} />
+                            <BookingSchedule room={this.state.room._id} nameRoom={this.state.room.name } local={this.state.local} currentDate={this.state.currentDate} loggedUser={this.props.loggedUser} books={this.state.books} updateBooks={this.refreshBooks} storeUser={this.props.storeUser} />
 
                         </Col> 
 

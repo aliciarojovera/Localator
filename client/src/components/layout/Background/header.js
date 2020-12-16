@@ -5,7 +5,7 @@ import React from 'react';
 import './header.css';
 
 const Background = () => {
-    const videoSource = "https://media.istockphoto.com/videos/musician-playing-drums-close-up-rock-music-band-performing-at-concert-video-id1195516665"
+    const videoSource = "https://res.cloudinary.com/aliciarojo/video/upload/v1607609138/samples/sea-turtle.mp4"
     return (
         <div className="colorBack">
             <video autoPlay="autoplay" loop="loop" muted className="Video" >
