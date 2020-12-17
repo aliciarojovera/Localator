@@ -3,7 +3,7 @@ import localService from '../../../service/local.service'
 import { Form, Col, Row, Container, Button, FormLabel } from 'react-bootstrap'
 import "flatpickr/dist/themes/material_green.css";
 import Flatpickr from "react-flatpickr";
-import './local-form.css'
+import './Local-form.css'
 import Autocomplete from '../Maps/Autocomplete'
 
 
@@ -108,17 +108,15 @@ latLngHandler = (latLng, address) => {
 
                                 <Form.Group>
                                     <Form.Label>Dirección</Form.Label>
-                                    <Autocomplete handler={this.latLngHandler} defAddress={this.state.address}></Autocomplete>
+                                    <Autocomplete handler={this.latLngHandler} default={this.state.address}></Autocomplete>
                                 </Form.Group>
 
                                 <Form.Group controlId="latitude">
-                                    <Form.Label>Latitud</Form.Label>
-                                    <Form.Control type="text" name="latitude" value={this.state.latitude} onChange={this.handleInputChange} />
+                                    <Form.Control type="text" name="latitude" className="displayNone" value={this.state.latitude} onChange={this.handleInputChange} />
                                 </Form.Group>
 
                                 <Form.Group controlId="longitude">
-                                    <Form.Label>Longitud</Form.Label>
-                                    <Form.Control type="number" name="longitude" value={this.state.longitude} onChange={this.handleInputChange} />
+                                    <Form.Control type="number" name="longitude " className="displayNone" value={this.state.longitude} onChange={this.handleInputChange} />
                                 </Form.Group>
 
                                 <div className="center">
@@ -161,11 +159,7 @@ latLngHandler = (latLng, address) => {
                                             </Flatpickr>
                                         </div></div>
                                 )}
-                                {/* {this.state.rooms.map((elm, idx) =>
-                                    <>
-                                        <FormLabel key={idx}>{elm.name}</FormLabel>
-                                        </>
-                                )} */}
+                         
                                 <Button variant="dark" type="submit">Editar local</Button>
                             </Form>
                         </Col>

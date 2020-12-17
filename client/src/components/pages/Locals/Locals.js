@@ -1,5 +1,5 @@
 import { Container, Row } from 'react-bootstrap'
-import LocalCard from './local-card'
+import LocalCard from './Local-card'
 import React, { Component } from 'react'
 import LocalService from '../../../service/local.service'
 import Map from '../Maps/Map'

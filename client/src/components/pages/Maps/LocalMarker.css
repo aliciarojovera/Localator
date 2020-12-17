@@ -1,7 +1,9 @@
 .localMarkerPic {
     position: 'absolute'; 
     transform: translate(-50%, -50%);
-    width: 60px;
+    width: 30px;
+    object-fit: cover;
+    height: 45px;
     background-color: rgba(255, 255, 255, 0);
     border-radius: 20px;
     transition: 0.2s;
@@ -11,7 +13,8 @@
 .localMarkerPic:hover {
     position: 'absolute'; 
     transform: translate(-50%, -50%);
-    width: 80px;
+    width: 50px;
+    height: 70px;
     border-radius: 20px;
      z-index: 99 !important 
 }

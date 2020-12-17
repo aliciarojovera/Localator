@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import LocalsService from '../../../service/local.service'
 import { Link } from 'react-router-dom'
 import { Container, Row, Col, Button, Card } from 'react-bootstrap'
-import './local-details.css'
+import './Local-details.css'
 import BookingSchedule from './booking/bookingSchedule'
 import BookingService from '../../../service/booking.service'
 import Map from "../Maps/Map"

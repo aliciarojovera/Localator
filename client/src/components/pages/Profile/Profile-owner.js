@@ -3,7 +3,7 @@ import { Button, Container, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import React, { Component } from 'react'
 
-import LocalCard from '../Locals/local-card'
+import LocalCard from '../Locals/Local-card'
 import LocalService from './../../../service/local.service'
 import './Profile-owner.css'
 

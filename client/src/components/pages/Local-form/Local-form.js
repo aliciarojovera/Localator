@@ -3,7 +3,7 @@ import localService from '../../../service/local.service'
 import { Form, Col, Row, Container, Button, FormLabel } from 'react-bootstrap'
 import "flatpickr/dist/themes/material_green.css";
 import Flatpickr from "react-flatpickr";
-import './local-form.css'
+import './Local-form.css'
 import Autocomplete from '../Maps/Autocomplete'
 
 
