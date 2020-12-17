@@ -3,6 +3,8 @@ import LocalCard from './Local-card'
 import React, { Component } from 'react'
 import LocalService from '../../../service/local.service'
 import Map from '../Maps/Map'
+import SubTitle from '../../layout/Home/SubTitle'
+import './Locals.css'
 
 class Locals extends Component {
 
@@ -35,10 +37,11 @@ class Locals extends Component {
             <>
                 <Map locals={this.state.locals} />
                 <Container>
-                    <h1>Listado de locales</h1>
+                    <SubTitle text="Listado de locales"></SubTitle>
                     {this.state.locals ?
                         <>
                             <Row>
+                                
                                 {this.state.locals.map(elm => <LocalCard key={elm._id} {...elm} loggedUser={this.state.loggedUser} />)}
                             </Row></>
                         :

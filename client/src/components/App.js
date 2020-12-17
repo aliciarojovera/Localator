@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 
-import Background from './layout/Background/header'
 import Navigation from './layout/Navigation/navigation'
 import Signup from './pages/Signup/Signup'
 import SignupOwner from './pages/Signup/Signup.Owner'
@@ -18,6 +17,7 @@ import RoomForm from './pages/Local-form/Room-form'
 import EditRoomForm from './pages/Locals/Rooms/Edit-room-form'
 import EditForm from './pages/Local-form/Edit-local-form'
 import RoomDetails from './pages/Locals/Rooms/Room-details'
+import Home from './layout/Home/Home'
 
 class App extends Component {
     constructor() {
@@ -60,9 +60,8 @@ class App extends Component {
                             <Route path="/editar-sala/:salaId" render={props => <EditRoomForm {...props}></EditRoomForm>} />
 
                             <Route path="/sala/:salaId" render={props => this.state.loggedInUser ? <RoomDetails {...props} loggedUser={this.state.loggedInUser} storeUser={this.setTheUser}></RoomDetails> : <Redirect to="/inicio-sesion" />}/>
-                            <Route exact path="/" render={() => <Background></Background>} />
                             <Route path="/logout" render={() => <Redirect to="/" />} />
-
+                            <Route exact path="/" render={() => <Home />} />
                         </main>
                     </>
                 </Switch>

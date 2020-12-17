@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import AuthService from './../../../service/auth.service'
-
+import SubTitle from '../../layout/Home/SubTitle'
 import { Navbar, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import logo from './cable-jack.png'
 import './navigation.css'
 
 class Navigation extends Component {
@@ -27,19 +26,9 @@ class Navigation extends Component {
         return (<>
             <Navbar bg="dark" variant="dark" expand="md" className="nav">
 
+                
                 <Link to="/">
-
-                    <Navbar.Brand >
-                        <img
-                            alt="Logo"
-                            src={logo}
-                            width="50"
-                            height="50"
-                            className="d-inline-block align-top logo"
-                        />{' '}</Navbar.Brand>
-                </Link>
-                <Link to="/">
-                    <Navbar.Brand as="span" href="/">Localator</Navbar.Brand></Link>
+                    <Navbar.Brand as="span" href="/"><SubTitle text="Localator"></SubTitle></Navbar.Brand></Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">

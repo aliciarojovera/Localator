@@ -1,0 +1,33 @@
+@import url(https://fonts.googleapis.com/css?family=Permanent+Marker);
+
+.victory {
+    position: relative;
+    font-family: 'Permanent Marker', cursive;
+    font-variant:small-caps;
+    font-size: 80px;
+    -webkit-transform: skew(-15deg,-15deg);
+    padding-left: 80px;
+    background-image: -webkit-linear-gradient(#FF0FF8 0%,  #F9F9F7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+    -webkit-filter: drop-shadow(2px 2px 20px #f008b7);
+
+    animation: flx 2s linear infinite;
+    -moz-animation: flx 2s linear infinite;
+    -webkit-animation: flx 2s linear infinite;
+    -o-animation: flx 2s linear infinite;
+}
+
+@keyframes flx {
+    0%,
+    10% {
+      text-shadow: 0 0 1vw #fd5ad448, 0 0 3vw #c75ead69, 0 0 1vw #df66c149, 0 0 1vw #df5bbe4b, 0 0 .4vrgba(223, 102, 193, 0.384)c1, .5vw .5vw .1vw #df66c14b;
+      color: #df66c141;
+    }
+    0.1% {
+      text-shadow: 0 0 .5vw #ec79cf77, 0 0 1.5vw #f008b671, 0 0 5vw #ec69cb85, 0 0 5vw #fa6ed77c, 0 0 .2vw #ce5bb186, .5vw .5vw .1vw #fa8ddf63;
+      color: #d873bf79;
+    }
+  }
+  

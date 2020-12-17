@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import AuthService from '../../../service/auth.service'
 import {Link} from 'react-router-dom'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import SubTitle from '../../layout/Home/SubTitle'
 
 class Signup extends Component {
 
@@ -42,7 +43,8 @@ class Signup extends Component {
                     <Row>
                         <Col md={{ span: 5, offset: 0 }}>
                             <br/>
-                            <h2 className="title">Registro de usuario</h2>
+
+                            <SubTitle text="Registro de usuario"></SubTitle>
                             <Link to="/registro-local" className="signup-label">¿Tienes un local? ¡Regístrate aquí!</Link>
 
                         </Col>

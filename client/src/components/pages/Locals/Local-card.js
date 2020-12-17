@@ -1,5 +1,5 @@
 import { Col, Card } from 'react-bootstrap'
-
+import './LocalCard.css'
 import { Link } from 'react-router-dom'
 
 const LocalCard = ({ name, _id, owner, loggedUser }) => {
