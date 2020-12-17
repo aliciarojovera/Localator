@@ -4,7 +4,8 @@ export default class EmailService {
 
     constructor() {
         this.apiHandler = axios.create({
-            baseURL: 'http://localhost:5000/send-email',
+            baseURL: `${process.env.REACT_APP_API_URL}/send-email`,
+
             withCredentials: true
         })
     }
