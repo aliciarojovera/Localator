@@ -1,0 +1,118 @@
+.label{
+    color: #ffffff;
+
+}
+.form-control{
+    border: 1px solid #fe7d68;
+    border-radius: 150px;
+    padding: 0 20px;
+    height: 42px;
+    font-size: 16px;
+    line-height: 16px;
+    caret-color: #fbb73c;
+    color: #fbcf0a;
+    display: block;
+    width: 100%;
+    background: rgba(54, 25, 81, 0.61);
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    text-align: start;
+    appearance: textfield;
+        -webkit-rtl-ordering: logical;
+    cursor: text;
+    margin: 0em;
+    visibility: inherit;
+}
+.form-control:focus{
+    background-color:transparent
+}
+
+.btn-reg{
+    transition: 0.3s;
+    text-align: center;
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid transparent;
+    font-size: 18px;
+    border-radius: 1px;
+    border: 1px solid #fe7d68;
+    border-radius: 50%;
+    height: 120px;
+    box-shadow: 1px 0px 30px 0px rgb(37, 6, 45);
+    color: #ffffff;
+    width: 120px;
+    position: absolute;
+    left:62%;
+    background: rgb(249,46,144);
+    background: linear-gradient(180deg, rgb(249, 213, 2) 00%, rgb(249, 35, 145) 100%);
+    color: #ffffff;
+}
+.btn-reg:hover{
+    color:white;
+    width: 130px;
+    height: 130px;
+}
+.btn-log{
+    transition: 0.3s;
+    text-align: center;
+    touch-action: manipulation;
+    cursor: pointer;
+    border: 1px solid transparent;
+    font-size: 18px;
+    border-radius: 1px;
+    border: 1px solid #fe7d68;
+    border-radius: 50%;
+    height: 120px;
+    box-shadow: 1px 0px 30px 0px rgb(37, 6, 45);
+    color: #ffffff;
+    width: 120px;
+    position: absolute;
+    left:56%;
+    background: rgb(249,46,144);
+    background: linear-gradient(180deg, rgb(249, 213, 2) 00%, rgb(249, 35, 145) 100%);
+    color: #ffffff;
+}
+.btn-log:hover{
+    color:white;
+    width: 130px;
+    height: 130px;
+}
+.generaldiv{
+    background-image: url('https://static.vecteezy.com/system/resources/thumbnails/000/693/323/original/abstract-gradient-pink-purple-stripes-on-purple-background.jpg');
+height: 100vh;
+}
+.title{
+  
+    color: white;
+    margin: 0 auto
+}
+.formBack{
+    margin-top:50px;
+    background:  rgba(80, 18, 83, 0.6);
+    padding-bottom:60px;
+    margin:0 auto;
+    text-align: center;
+    width: 300px;
+    border:1px  solid orange;
+    border-radius:16px;
+    margin-top:20px;
+    max-width: 600px;
+}
+.form-group{
+    margin: 20px ;
+}
+.signup-label{
+    margin-top:200px;
+    color:white;
+    text-align: left;
+    text-decoration:none
+}
+.signup-label:hover{
+    color:white;
+    text-decoration: none;
+}

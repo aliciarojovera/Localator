@@ -15,7 +15,7 @@ router.post('/signup-owner', (req, res) => {
         return
     }
 
-    if (password.length < 6) {
+    if (password.length < 8) {
         res.status(400).json({ message: 'Contraseña insegura' })
         return
     }

@@ -3,7 +3,6 @@ import './bookingSchedule.css'
 import BookingService from '../../../../service/booking.service'
 import BookingModal from './bookingModal'
 import { Container, Modal } from 'react-bootstrap'
-import { Redirect } from 'react-router-dom'
 
 
 class BookingSchedule extends Component {
@@ -136,7 +135,6 @@ class BookingSchedule extends Component {
     }
 
     handleClick = (elm) => {
-   
         if (elm < Date.now() || (this.isRed(elm) === "hoursRed" && this.props.loggedUser._id !== this.props.local.owner && this.props.loggedUser._id !== this.isOwner(elm))) {
 
         } else if (this.isRed(elm) === "hoursRed" && (this.props.loggedUser._id === this.props.local.owner || this.props.loggedUser._id === this.isOwner(elm))) {
@@ -168,7 +166,7 @@ class BookingSchedule extends Component {
 
                             <Modal className=" Modal" show={this.state.showModal} onHide={() => this.handleModal(false)}>
                                 <Modal.Body>
-                                    <BookingModal
+                                    <BookingModal className="animate__slideOutLeft"
                                         closeModal={() => this.handleModal(false)}
                                         date={this.state.bookDate}
                                         room={this.props.room}
@@ -176,7 +174,7 @@ class BookingSchedule extends Component {
                                         nameRoom={this.props.nameRoom}
                                         local={this.props.local}
                                         books={this.state.books}
-                                        owner={this.props.loggedUser? this.props.loggedUser._id: ""}
+                                        owner={this.props.loggedUser._id}
                                         localOwner={this.props.local.owner}
                                         updateBooks={this.props.updateBooks}
                                         rooms={this.state.local.room}

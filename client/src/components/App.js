@@ -59,7 +59,7 @@ class App extends Component {
                             <Route path="/nueva-sala/:localId" render={(props) => <RoomForm {...props}></RoomForm>} />
                             <Route path="/editar-sala/:salaId" render={props => <EditRoomForm {...props}></EditRoomForm>} />
 
-                            <Route path="/sala/:salaId" render={props => <RoomDetails {...props} loggedUser={this.state.loggedInUser} storeUser={this.setTheUser}></RoomDetails>}/>
+                            <Route path="/sala/:salaId" render={props => this.state.loggedInUser ? <RoomDetails {...props} loggedUser={this.state.loggedInUser} storeUser={this.setTheUser}></RoomDetails> : <Redirect to="/inicio-sesion" />}/>
                             <Route exact path="/" render={() => <Background></Background>} />
                             <Route path="/logout" render={() => <Redirect to="/" />} />
 

@@ -36,38 +36,43 @@ class Signup extends Component {
     render() {
 
         return (
-            <>
+            <div id="kc-container" className="generaldiv">
                 <Container>
 
                     <Row>
-                        <Col md={{ span: 8, offset: 2 }}>
-                            <h1>Registro de usuario</h1>
-                            <hr />
+                        <Col md={{ span: 5, offset: 0 }}>
+                            <br/>
+                            <h2 className="title">Registro de usuario</h2>
+                            <Link to="/registro-local" className="signup-label">¿Tienes un local? ¡Regístrate aquí!</Link>
+
+                        </Col>
+                        <Col md={{ span: 6, offset: 0}}>
+
+                            <div className="formBack">
                             <Form onSubmit={this.handleSubmit}>
                                 <Form.Group controlId="username">
-                                    <Form.Label>Usuario</Form.Label>
+                                    <Form.Label className="label">Usuario</Form.Label>
                                     <Form.Control type="text" name="username" value={this.state.username} onChange={this.handleInputChange} />
                                 </Form.Group>
                                 <Form.Group controlId="password">
-                                    <Form.Label>Contraseña</Form.Label>
+                                    <Form.Label className="label">Contraseña</Form.Label>
                                     <Form.Control type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
                                 </Form.Group>
                                 <Form.Group controlId="email">
-                                    <Form.Label>E-mail</Form.Label>
+                                    <Form.Label className="label">E-mail</Form.Label>
                                     <Form.Control type="text" name="email" value={this.state.email} onChange={this.handleInputChange} />
                                 </Form.Group>
                                 <Form.Group controlId="telephone">
-                                    <Form.Label>Teléfono</Form.Label>
+                                    <Form.Label className="label">Teléfono</Form.Label>
                                     <Form.Control type="number" name="telephone" value={this.state.telephone} onChange={this.handleInputChange} />
                                 </Form.Group>
-                                <Button variant="dark" type="submit">Registrarme</Button>
-                            </Form>
+                                <Button variant="dark" className="btn-reg" type="submit">Registrarme</Button>
+                            </Form></div>
                             <br/>
-                            <Link to="/registro-local">¿Tienes un local? ¡Regístrate aquí!</Link>
                         </Col>
                     </Row>
                 </Container>
-            </>
+            </div>
         )
     }
 }

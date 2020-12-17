@@ -8,7 +8,7 @@ const LocalMarker = ({ text, handleClick }) => {
 
     return (
         <>
-            <div><img src='https://i.redd.it/1fmq843ih1o51.png'
+            <div><img src='./music (2).png'
                 alt={text}
                 className="localMarkerPic"
                 // onClick={handleClick}
