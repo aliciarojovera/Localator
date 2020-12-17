@@ -3,30 +3,49 @@ import { Row, Col, Container } from 'react-bootstrap'
 import './UserBook.css'
 
 const UserBook = ({ books }) => {
-    console.log('THE BOOKS', books)
+    //ordenar dates
+    books.sort(function compare(a, b) {
+        var dateA = new Date(a.date);
+        var dateB = new Date(b.date);
+        return dateA - dateB;
+    })
+    
+    
     return (
         <>
-            {books.map((elm, idx) =>
-                <>
-                    <Container>
-                        <Row>
-                            <Col sm={{ span: 6 }} className="pastBooks">
-                                {new Date(elm.date) > new Date(Date.now())
-                                    ?
-                                    <UserBookCard elm={elm} key={idx} />
-                                    : null}
-                            </Col>
-                            <Col sm={{ span: 6 }} className="futureBooks">
-                                {new Date(elm.date) < Date.now()
-                                    ?
-                                    <UserBookCard elm={elm} key={idx} />
-                                    : null}
-                            </Col>
+            <Container>
+                <hr></hr>
+                <br></br>
+                <h5 className="cardTitle">Futuras</h5>
+                <br></br>
+                <hr></hr>
+                <Row>
+                    {books.map((elm, idx) =>
+                        new Date(elm.date) > Date.now()
+                            ?
+                            <>
+                                <UserBookCard elm={elm} key={idx} mode="future" />
+                            </>
+                            : null
+                    )}
+                </Row>
+                <hr></hr>
+                <br></br>
+                <h5 className="cardTitle">Pasadas</h5>
+                <br></br>
+                <hr></hr>
+                <Row>
+                    {books.map((elm, idx) =>
+                        new Date(elm.date) < Date.now()
+                            ?
+                            <>
+                                <UserBookCard elm={elm} key={idx} mode="past" />
+                            </>
+                            : null
+                    )}
 
-                        </Row>
-                    </Container>
-                </>
-            )}
+                </Row>
+            </Container>
         </>
     )
 }

@@ -2,7 +2,8 @@ import { Component } from 'react'
 import './bookingSchedule.css'
 import BookingService from '../../../../service/booking.service'
 import BookingModal from './bookingModal'
-import { Container, Row, Button, Modal } from 'react-bootstrap'
+import { Container, Modal } from 'react-bootstrap'
+import { Redirect } from 'react-router-dom'
 
 
 class BookingSchedule extends Component {
@@ -59,7 +60,7 @@ class BookingSchedule extends Component {
 
     }
 
-
+//permite ver el nombre de las reservas so eres el owner o el dueño de la reserva
     isInvited = (elm) => {
         for (let i = 0; i < this.state.books.length; i++) {
             let goodDate = new Date(this.state.books[i].date)
@@ -70,6 +71,8 @@ class BookingSchedule extends Component {
             }
         }
     }
+
+
 
     isOwner = (elm) => {
         for (let i = 0; i < this.state.books.length; i++) {
@@ -82,11 +85,14 @@ class BookingSchedule extends Component {
         }
     }
 
+    //pinta el color de las celdas dependiendo de las reservas y de tus permisos
+
+
     isRed = (elm) => {
         for (let i = 0; i < this.state.books.length; i++) {
             let goodDate = new Date(this.state.books[i].date)
             if (goodDate.toString() === elm.toString()) {
-                if (this.props.loggedUser._id != this.props.local.owner && goodDate < Date.now()) {
+                if (this.props.loggedUser._id !== this.props.local.owner && goodDate < Date.now()) {
                     return "hoursGrey"
                 } else {
                     return "hoursRed"
@@ -102,9 +108,7 @@ class BookingSchedule extends Component {
 
     handleModal = (visible, elm) => this.setState({ showModal: visible, bookDate: elm })
 
-    renderAgain = () => {
-        console.log('renderAGAIN==========')
-    }
+  
 
     removeReh = elm => {
         let room = this.props.room
@@ -113,10 +117,8 @@ class BookingSchedule extends Component {
             .deleteBook(myBody)
             .then(res => {
                 if (res.status = 200) {
-                    console.log('El res ha sido 200')
-                    console.log(res)
                     this.props.updateBooks(res.data.reservation)
-                    this.renderAgain()
+              
                 }
             })
             .catch(err => console.log('THIS IS MY ERROR: ', err))
@@ -130,15 +132,16 @@ class BookingSchedule extends Component {
         } else {
             return false
         }
-        return true
+        // return true
     }
 
     handleClick = (elm) => {
-        if (elm < Date.now() || (this.isRed(elm) === "hoursRed" && this.props.loggedUser._id != this.props.local.owner && this.props.loggedUser._id != this.isOwner(elm))) {
+   
+        if (elm < Date.now() || (this.isRed(elm) === "hoursRed" && this.props.loggedUser._id !== this.props.local.owner && this.props.loggedUser._id !== this.isOwner(elm))) {
 
         } else if (this.isRed(elm) === "hoursRed" && (this.props.loggedUser._id === this.props.local.owner || this.props.loggedUser._id === this.isOwner(elm))) {
             if (window.confirm('¿Seguro que quieres borrar la reserva?')) {
-                if (this.isMinus24(elm) && this.props.loggedUser._id != this.props.local.owner) {
+                if (this.isMinus24(elm) && this.props.loggedUser._id !== this.props.local.owner) {
                     alert('No puedes borrar la reserva porque es demasiado tarde, ponte en contacto con la sala')
                 } else {
                     this.removeReh(elm)
@@ -162,16 +165,18 @@ class BookingSchedule extends Component {
                     {this.state.bookingHours.map((elm, idx) =>
                         <>
                             <div onClick={() => this.handleClick(elm)} className={this.isRed(elm)} > <p>{this.isInvited(elm) ? elm.getHours() + "  " + this.isInvited(elm) : elm.getHours()}</p></div>
-                            
+
                             <Modal className=" Modal" show={this.state.showModal} onHide={() => this.handleModal(false)}>
                                 <Modal.Body>
                                     <BookingModal
                                         closeModal={() => this.handleModal(false)}
                                         date={this.state.bookDate}
                                         room={this.props.room}
-                                        schedule={this.props.local.schedule} 
+                                        schedule={this.props.local.schedule}
                                         nameRoom={this.props.nameRoom}
-                                        books={this.state.books} owner={this.props.loggedUser._id}
+                                        local={this.props.local}
+                                        books={this.state.books}
+                                        owner={this.props.loggedUser? this.props.loggedUser._id: ""}
                                         localOwner={this.props.local.owner}
                                         updateBooks={this.props.updateBooks}
                                         rooms={this.state.local.room}
@@ -183,10 +188,10 @@ class BookingSchedule extends Component {
                     )}
                 </>
                 :
-<Container className="center">
-                        <h4>Cerrado</h4>
-                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpyaNHTezXCdDPPXl6-ArzCO5S7DUIpRyklw&usqp=CAU'/>
-                       </Container>
+                <Container className="center">
+                    <h4>Cerrado</h4>
+                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpyaNHTezXCdDPPXl6-ArzCO5S7DUIpRyklw&usqp=CAU' alt="Cerrado" />
+                </Container>
         )
     }
 

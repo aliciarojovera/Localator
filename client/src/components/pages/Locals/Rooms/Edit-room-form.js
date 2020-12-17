@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Form, Col, Row, Container, Button, FormLabel } from 'react-bootstrap'
+import { Form, Col, Row, Container, Button } from 'react-bootstrap'
 import LocalService from '../../../../service/local.service'
-
+import FilesService from '../../../../service/upload.service'
+import './Edit-room-form.css'
 
 
 
@@ -16,11 +17,11 @@ class EditRoomForm extends Component {
 
         }
         this.localService = new LocalService()
+        this.filesService = new FilesService()
 
     }
 
     componentDidMount = () => {
-        const room = this.props.match.params.rooom_id
         this.localService
             .getRooms(this.props.match.params)
             .then(res => {
@@ -31,13 +32,30 @@ class EditRoomForm extends Component {
 
     handleInputChange = e => this.setState({ [e.target.name]: e.target.value })
 
+    handleImageUpload = e => {
+
+        const uploadData = new FormData()
+        uploadData.append('image', e.target.files[0])
+ 
+
+        this.filesService
+            .uploadImage(uploadData)
+            .then(response => {
+                this.setState({ image: response.data.secure_url, uploadingActive: false })
+
+                console.log(response)
+            })
+
+            .catch(err => console.log('ERRORRR!', err))
+
+
+    }
 
     setEquipment = (equipment) => {
         let equipmentList = []
         equipment.map((elm, idx) => {
             var equipo = {}
             equipo[idx] = elm
-
             equipmentList.push(equipo)
         }
         )
@@ -65,7 +83,7 @@ class EditRoomForm extends Component {
         this.setState({ equipment: equipment })
     };
 
-    // handle click event of the Remove button
+    // handle click event del boton de eliminar
     handleRemoveClick = index => {
         const list = this.state.equipment;
         list.splice(index, 1);
@@ -73,7 +91,7 @@ class EditRoomForm extends Component {
 
     };
 
-    // handle click event of the Add button
+    // handle click event del boton de añadir
     handleAddClick = () => {
         let add = {}
         console.log(this.state.equipment.length)
@@ -114,9 +132,16 @@ class EditRoomForm extends Component {
 
 
 
-                                    <Form.Group controlId="latitude">
+                                    {/* <Form.Group controlId="latitude">
                                         <Form.Label>Image</Form.Label>
-                                        <Form.Control type="text" name="latitude" value={this.state.image} onChange={this.handleInputChange} />
+                                        <Form.Control type="text" name="image" value={this.state.image} onChange={this.handleInputChange} />
+                                    </Form.Group> */}
+                                    <Form.Group controlId="image">
+                                        <Form.Label>Imagen (archivo)</Form.Label>
+                                        <br/>
+                                        <img classsName="roomImage" src={this.state.image}></img>
+                                        <br/>
+                                        <Form.Control type="file" onChange={this.handleImageUpload} />
                                     </Form.Group>
 
                                     <Form.Group controlId="equipment">
@@ -129,12 +154,11 @@ class EditRoomForm extends Component {
                                                 </Col>
                                                 <Col md={{ span: 3, offset: 0 }}>
                                                     <div className="btn-box flex">
-                                                        <button className="remove"
+                                                        <button className="remove" onClick={() => this.handleRemoveClick(index)}>Remove</button>
 
-                                                            onClick={() => this.handleRemoveClick(index)}>Remove</button>
-                                                        {this.state.equipment.length - 1 === index && <button className="Add"
-
-                                                            onClick={() => this.handleAddClick(index)}>Add</button>}
+                                                        {this.state.equipment.length - 1 === index &&
+                                                            
+                                                            <button className="Add" onClick={() => this.handleAddClick(index)}>Add</button>}
                                                     </div></Col>
                                             </Row>
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import AuthService from './../../../service/auth.service'
 
 import { Navbar, Nav } from 'react-bootstrap'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import logo from './cable-jack.png'
 import './navigation.css'
 
@@ -16,7 +16,7 @@ class Navigation extends Component {
     logout = () => {
         this.authService
             .logout()
-            .then(res => {
+            .then(() => {
                 this.props.storeUser(undefined)
              
 

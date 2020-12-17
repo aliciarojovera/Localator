@@ -54,9 +54,7 @@ class RoomForm extends Component {
 
         const uploadData = new FormData()
         uploadData.append('image', e.target.files[0])
-        // console.log('ESTO ES UNA IMAGEN EN MEMORIA:', e.target.files[0])
 
-        // this.setState({ uploadingActive: true })
 
         this.filesService
             .uploadImage(uploadData)
@@ -74,7 +72,6 @@ class RoomForm extends Component {
 
     handleInputChangeEquipment = e => {
 
-        //////PUNTO AQUI
         const equipment = this.state.equipment
         equipment[e.target.name][e.target.name] = [e.target.value].toString()
         console.log(equipment)

@@ -38,7 +38,7 @@ class MemberForm extends Component {
 
     takeOne = (id) => {
         let members = this.state.members
-        members = members.filter(elm => elm.id != id)
+        members = members.filter(elm => elm.id !== id)
         this.setState({ members })
     }
 

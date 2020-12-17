@@ -35,6 +35,16 @@ router.post('/findBooks', (req, res) => {
         .catch(err => res.status(500).json(err))
 }
 })
+router.post('/findUserBooks', (req, res) => {
+    console.log('=======findUserBooks')
+
+    Reservation
+        .find({ _id: { $in: req.body } })
+        .populate({ path: 'room', populate: { path: 'local' } })
+        .then(response => {
+            res.json(response)
+        })
+})
 
 
 router.post('/newBook', (req, res) => {

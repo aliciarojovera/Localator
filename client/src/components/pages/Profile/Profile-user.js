@@ -1,4 +1,3 @@
-
 import { Component } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import BookingService from './../../../service/booking.service'
@@ -9,21 +8,19 @@ class ProfileUser extends Component {
 
     constructor(props) {
         super(props)
-        this.state={
+        this.state = {
             loggedUser: this.props.loggedUser,
-            books:undefined
+            books: undefined
         }
         this.bookingService = new BookingService()
 
     }
-    componentDidMount = () => {
-     
-            this.bookingService
-                .findBooks(this.props.loggedUser.reservation)
-                .then(res => this.setState({ books: res.data }))
-        console.log(this.state.books)
-        
 
+    //=====> USER BOOKS <=====
+    componentDidMount = () => {
+        this.bookingService
+            .findUserBooks(this.props.loggedUser.reservation)
+            .then(res => this.setState({ books: res.data }))
     }
 
 
@@ -34,16 +31,12 @@ class ProfileUser extends Component {
 
                 <MemberForm user={this.state.loggedUser} storeUser={this.props.storeUser} />
 
-                <h2>Tus reservas</h2>
+                <h2 className="cardTitle" >Tus reservas</h2>
 
 
                 {this.state.books
                     ?
                     <>
-                        <Row>
-                            <Col sm={{ span: 6 }}><h4>Pasadas</h4></Col>
-                            <Col sm={{ span: 6 }}><h4>Futuras</h4></Col>
-                        </Row>
                         <UserBook books={this.state.books} />
                     </>
                     :

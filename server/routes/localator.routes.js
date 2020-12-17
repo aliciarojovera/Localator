@@ -76,7 +76,7 @@ router.post('/new-room/', (req, res) => {
 
 router.post('/edit-room', (req, res) => {
 
-    const { id, equipment, name, price } = req.body
+    const { id, equipment, name, price , image} = req.body
     const equipmentList = []
     equipment.map((elm, index) => {
         if (Object.values(elm)[0] !== '') {
@@ -86,7 +86,7 @@ router.post('/edit-room', (req, res) => {
 
 
     Room
-        .findByIdAndUpdate(id, { name, price, equipment: equipmentList }, { new: true })
+        .findByIdAndUpdate(id, { name, price, equipment: equipmentList , image}, { new: true })
         .then(response => res.json(response))
         .catch(err => res.status(500).json(err))
 

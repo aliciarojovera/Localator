@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Col, Row, Button, FormLabel } from 'react-bootstrap'
+import { Form, Col, Row, Button } from 'react-bootstrap'
 import './MemberCard.css'
 
 const MemberCard = ({ addOne, takeOne, name, mail, onChange, id }) => {

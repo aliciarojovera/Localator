@@ -51,7 +51,7 @@ class BookingForm extends Component {
         const room = this.state.room
         const owner = this.state.owner
         let name = ""
-        const emailData = [this.props.nameRoom, this.state.date.getHours(), this.state.date.getDate(), this.state.date.getMonth() + 1 ,this.state.date.getFullYear(), this.props.loggedUser.members ]
+        const emailData = [this.props.nameRoom, this.state.date.getHours(), this.state.date.getDate(), this.state.date.getMonth() + 1 ,this.state.date.getFullYear(), this.props.loggedUser.members , this.props.local]
         if (this.props.loggedUser._id === this.props.localOwner) {
             name=this.state.name
         }
@@ -76,7 +76,7 @@ class BookingForm extends Component {
         }
     }
 
-
+    //Saca el día de la semana
     dayWeek = (date) => {
         if (date.getDay() === 0) {
             return 6

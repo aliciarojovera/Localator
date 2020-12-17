@@ -59,9 +59,6 @@ class RoomDetails extends Component {
             let today = new Date()
             today = today.toString()
             this.setState({ currentDate: today, books: res.data }, () => this.findLocal())
-            let fecha = this.state.books[0].date
-
-           
 
         })
             .catch(err => console.log(err))
@@ -93,7 +90,6 @@ class RoomDetails extends Component {
     }
 
     render() {
-        const dayWeek = ["Lun", "Mar", "Mie", "Jue", "Vie", "Sáb", "Dom"]
 
         return (
             this.state.local ? 
@@ -102,7 +98,7 @@ class RoomDetails extends Component {
                     <Row>
                         <Col md={{ span: 5, offset: 1}}>
                     <h1>{this.state.room.name}</h1>
-                    <img className="imgDetails" src={this.state.room.image}></img>
+                    <img className="imgDetails" src={this.state.room.image} alt="Imagen del local"></img>
                             <h3>Equipo</h3>
                             <ul>
                             {this.state.room.equipment.map(elm=>
