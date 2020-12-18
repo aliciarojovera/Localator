@@ -87,6 +87,11 @@ class BookingForm extends Component {
 
     // comprueba si hay alguna reserva después de la que voy a hacer
     checkReh = (books, myHour, myDate) => {
+        books.sort(function compare(a, b) {
+            var dateA = new Date(a.date);
+            var dateB = new Date(b.date);
+            return dateA - dateB;
+        })
         for (let i = 0; i < books.length; i++) {
             let bookHour = new Date(books[i].date).getHours()
             if (new Date(books[i].date).getDate() === new Date(myDate).getDate() && bookHour > myHour) {
