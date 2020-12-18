@@ -3,6 +3,9 @@ import { Form, Container, Button } from 'react-bootstrap'
 import MemberCard from './MemberCard'
 import ProfileService from './../../../../service/profile.service'
 import './MemberForm.css'
+import SubTitle from '../../../layout/Home/SubTitle'
+import SubTitle2 from '../../../layout/Home/SubTitle2'
+import Loader from '../../../shared/Loader/Loader'
 
 class MemberForm extends Component {
     constructor() {
@@ -70,8 +73,8 @@ class MemberForm extends Component {
                 <Container>
 
                     <Form onSubmit={this.handleSubmit}>
-                        <h3>Añade a los miembros de tu banda</h3>
-                        <p>(Se enviará email con la info de las reservas que realices)</p>
+                        <h3><SubTitle2 text="Añade a los miembros de tu banda"></SubTitle2></h3>
+                        <p style={{color:"white"}}>(Se enviará email con la info de las reservas que realices)</p>
 
                         {this.state.members.map((elm, idx) =>
                             <MemberCard

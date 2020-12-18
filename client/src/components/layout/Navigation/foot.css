@@ -1,10 +1,12 @@
-  footer {
-    width: 100%;
-    padding: 1rem;
-    text-align: center;
-    transition: 200ms;
-    background: #343a40;
-    color:white;
-    position: absolute;
-    top: 100vh;
-  }
+
+.footer {
+  right: 0;
+  bottom: 0 ;
+  left: 0;
+  padding: 0.5rem;
+  color:white;
+  background-image: linear-gradient(to right,#47123c 0,#0f1158 100%) !important; /* override background image gradient w/ flat color */
+
+  text-align: center;
+  margin-top:100px
+}

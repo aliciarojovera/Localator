@@ -6,3 +6,26 @@
 .btn-new{
     margin-bottom: 20px;
 }
+
+.btn-retro2 {
+  padding:0.4vw 1vw;
+  color:#fff;
+  font-family: 'Source Code Pro', monospace;
+  font-size:1.5vw;
+  text-shadow: 0px 0px 5px #fff;
+  background-color:rgba(151, 54, 170, 0.948);
+  background-image : linear-gradient(0deg, rgba(133, 57, 57, 0.133) 0%, rgba(183, 70, 70, 0.133) 25%, rgba(113, 28, 100, 0.804) 25%, rgba(126, 42, 147, 0) 50%, #fff3 50%, #fff4 75%, rgba(191, 75, 75, 0) 75%);
+  background-size: 0.8rem 0.8rem;
+  border: solid 2px linear-gradient(45deg, rgb(221, 0, 214) 0%, rgb(160, 25, 187) 100%);
+  border-radius: 1vw;
+  box-shadow: 0px 0px 5px #E0E, 0px 0px 10px rgb(161, 35, 121),0px 0px 15px rgb(95, 36, 151), inset 0px 0px 30px rgb(68, 30, 105), inset 0px 0px 15px rgb(120, 18, 141);
+  transition: all ease-in-out 0.5s;
+  cursor:pointer;
+}
+
+.btn-retro2:hover{
+  box-shadow: 0px 5px 5px #F0F, 0px 0px 1000px #0000,0px 0px 15px #0EE, inset 0px 0px 30px #055;
+  background-color:rgb(126, 23, 142);
+  border:solid 2px #0DF;
+  transform: translate(0px, -5px);
+}

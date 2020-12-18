@@ -5,6 +5,7 @@ import LocalService from '../../../service/local.service'
 import Map from '../Maps/Map'
 import SubTitle from '../../layout/Home/SubTitle'
 import './Locals.css'
+import Loader from '../../shared/Loader/Loader'
 
 class Locals extends Component {
 
@@ -36,16 +37,16 @@ class Locals extends Component {
         return (
             <>
                 <Map locals={this.state.locals} />
-                <Container>
-                    <SubTitle text="Listado de locales"></SubTitle>
+                <Container><br/>
+                    <SubTitle className="listTitle" text="Listado de locales"></SubTitle>
                     {this.state.locals ?
                         <>
-                            <Row>
+                            <Row className="locals">
                                 
                                 {this.state.locals.map(elm => <LocalCard key={elm._id} {...elm} loggedUser={this.state.loggedUser} />)}
                             </Row></>
                         :
-                        <h1>cargando</h1>
+                        <Loader/>
                     }
                 </Container>
             </>

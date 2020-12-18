@@ -3,6 +3,8 @@ import { Form, Col, Row, Container, Button } from 'react-bootstrap'
 import LocalService from '../../../../service/local.service'
 import FilesService from '../../../../service/upload.service'
 import './Edit-room-form.css'
+import SubTitle from '../../../layout/Home/SubTitle'
+import SubTitle2 from '../../../layout/Home/SubTitle2'
 
 
 
@@ -113,19 +115,20 @@ class EditRoomForm extends Component {
                         <Row>
 
                             <Col md={{ span: 8, offset: 2 }}>
-                                <h1>Editar sala</h1>
+                                <br/>
+                                <h1><SubTitle text="Editar sala" /></h1>
                                 <hr />
 
                                 <Form onSubmit={this.handleSubmit}>
 
 
                                     <Form.Group controlId="username">
-                                        <Form.Label>Nombre</Form.Label>
+                                        <Form.Label><SubTitle2 text="Nombre" /></Form.Label>
                                         <Form.Control type="text" name="name" value={this.state.name} onChange={this.handleInputChange} />
                                     </Form.Group>
 
                                     <Form.Group controlId="telephone">
-                                        <Form.Label>Precio por hora</Form.Label>
+                                        <Form.Label><SubTitle2 text="Precio por hora" /></Form.Label>
                                         <Form.Control type="Text" name="price" value={this.state.price} onChange={this.handleInputChange} />
                                     </Form.Group>
 
@@ -137,7 +140,7 @@ class EditRoomForm extends Component {
                                         <Form.Control type="text" name="image" value={this.state.image} onChange={this.handleInputChange} />
                                     </Form.Group> */}
                                     <Form.Group controlId="image">
-                                        <Form.Label>Imagen (archivo)</Form.Label>
+                                        <Form.Label><SubTitle2 text="Imagen" /></Form.Label>
                                         <br/>
                                         <img classsName="roomImage" src={this.state.image}></img>
                                         <br/>
@@ -145,7 +148,7 @@ class EditRoomForm extends Component {
                                     </Form.Group>
 
                                     <Form.Group controlId="equipment">
-                                        <Form.Label>Equipmemt</Form.Label>
+                                        <Form.Label><SubTitle2 text="Equipment" /></Form.Label>
                                         {this.state.equipment.map((elm, index) =>
                                             <Row>
 
@@ -154,11 +157,11 @@ class EditRoomForm extends Component {
                                                 </Col>
                                                 <Col md={{ span: 3, offset: 0 }}>
                                                     <div className="btn-box flex">
-                                                        <button className="remove" onClick={() => this.handleRemoveClick(index)}>Remove</button>
+                                                        <button className="btn-retro" onClick={() => this.handleRemoveClick(index)}>Remove</button>
 
                                                         {this.state.equipment.length - 1 === index &&
                                                             
-                                                            <button className="Add" onClick={() => this.handleAddClick(index)}>Add</button>}
+                                                            <button className="btn-retro" onClick={() => this.handleAddClick(index)}>Add</button>}
                                                     </div></Col>
                                             </Row>
 
@@ -166,7 +169,8 @@ class EditRoomForm extends Component {
                                     </Form.Group>
 
 
-                                    <Button variant="dark" type="submit">Editar local</Button>
+                                    <Button className="btn-retro" type="submit">Editar local</Button>
+                                    <br/>
                                 </Form>
                             </Col>
                         </Row>

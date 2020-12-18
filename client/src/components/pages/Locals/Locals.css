@@ -1,23 +1,4 @@
-:root {
-    --white: 47deg, 98%, 95%;
-    --citrus: 47deg, 95%, 52%;
-    --orange: 23deg, 100%, 53%;
-    --sanguine: 347deg, 100%, 61%;
-    --pink: 346deg, 98%, 55%;
-    --electro: 181deg, 79%, 54%;
-    --purple: 261deg, 56%, 15%;
-    --night: 261deg, 89%, 7%;
-    --violet: 284deg, 80%, 20%;
-    
-    --sky-line: 7px;
-    --sun-size: 50vh;
-    --ground-size: 45vh;
-    --ground-line: 23px;
-    --ground-speed: 8s;
-    
-    --ratio-x: 0;
-    --ratio-y: 0;
-  }
+
   
 body {
 
@@ -26,4 +7,10 @@ body {
   
     background-image:linear-gradient(to bottom, hsla(var(--white), .05) 1px, transparent 1px);
     background-size: 1px var(--sky-line);
+  }
+ .neon2{
+text-align: center;
+  }
+  .locals{
+    margin-top:20px
   }

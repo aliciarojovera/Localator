@@ -6,6 +6,10 @@ import './Local-details.css'
 import BookingSchedule from './booking/bookingSchedule'
 import BookingService from '../../../service/booking.service'
 import Map from "../Maps/Map"
+import SubTitle from '../../layout/Home/SubTitle'
+import SubTitle2 from '../../layout/Home/SubTitle2'
+import Loader from '../../shared/Loader/Loader'
+
 
 
 class LocalDetails extends Component {
@@ -90,24 +94,31 @@ class LocalDetails extends Component {
                 {this.state.local && this.state.books
                     ?
                     <>
-
-                        <h1 > {this.state.local.name}</h1>
+                        <br></br>
+                        <h1 > <SubTitle text={this.state.local.name}></SubTitle></h1>
                         {this.state.local.owner === this.state.loggedUser._id ?
                             <>
-                                <Link className="btn btn-dark btn-sm " to={`/nueva-sala/${this.state.local._id}`}>Nueva sala</Link>
+                                <br></br><br></br>
+                                <Link className="btn-retro" to={`/nueva-sala/${this.state.local._id}`}>Nueva sala</Link>
                                 <div className="flexDates">
-                                    <Button className="btn btn-dark new-room" onClick={this.restDay}>Día anterior</Button>
-                                    <h2 className="date">{this.state.currentDate.slice(0, 10)}</h2>
-                                    <Button className="btn btn-dark" onClick={this.addDay}>Siguiente día</Button>
+                                    <Button className="btn-retro" onClick={this.restDay}>Día anterior</Button>
+                                    <h2 className="date"><SubTitle2 text={this.state.currentDate.slice(0, 10)}></SubTitle2></h2>
+                                    <Button className="btn-retro" onClick={this.addDay}>Siguiente día</Button>
                                 </div>
 
                                 <Row>
 
                                     {this.state.local.room.map((elm) =>
-                                        <Col key={elm._id}>{elm.name}
+                                        <Col key={elm._id}><SubTitle2 text={elm.name}></SubTitle2>
                                             <BookingSchedule room={elm._id} nameRoom={elm.name} nameLocal={this.state.local.name} local={this.state.local} currentDate={this.state.currentDate} loggedUser={this.props.loggedUser} books={this.state.books.filter(book => book.room === elm._id)} updateBooks={this.refreshBooks} storeUser={this.props.storeUser} />
-                                            <Link className="btn btn-dark btn-block btn-sm" to={`/editar-sala/${elm._id}`}> Editar sala </Link>
-                                            <Link className="btn btn-dark btn-block btn-sm" to={`/sala/${elm._id}`}> Ver sala </Link>
+                                            <br />
+
+                                            <Link className="btn-retro " to={`/editar-sala/${elm._id}`}> Editar sala </Link>
+                                            <br />
+
+                                            <br />
+                                            <br />
+                                            <Link className="btn-retro" to={`/sala/${elm._id}`}> Ver sala </Link>
 
                                         </Col>
 
@@ -121,46 +132,48 @@ class LocalDetails extends Component {
 
                                 <Row>
                                     <Col md={{ span: 6, offset: 1 }} >
-                                        <h3>Teléfono</h3>
-                                        <p>{this.state.local.telephone}</p>
-                                        <h3>Horario</h3>
+                                        <SubTitle2 text="Teléfono"></SubTitle2>
+                                        <p style={{color:"white"}}>{this.state.local.telephone}</p><br/>
+                                        <SubTitle2 text="Horario"></SubTitle2>
                                         <div className="flex">
 
                                             <div>
-                                                {this.state.local.schedule.openHour.map((elm, idx) => <p>{dayWeek[idx]}  {elm}:00 -</p>)}</div>
+                                                {this.state.local.schedule.openHour.map((elm, idx) => <p style={{ color: "white" }}>{dayWeek[idx]}  {elm}:00 -</p>)}</div>
                                             <div>
-                                                {this.state.local.schedule.closeHour.map(elm => <p>{elm}:00</p>)}</div>
+                                                {this.state.local.schedule.closeHour.map(elm => <p style={{ color: "white" }}>{elm}:00</p>)}</div>
                                         </div></Col>
                                     <Col md={5}>
 
                                         <Map local={this.state.local} zoom={20} />
                                     </Col>
                                 </Row>
-                                            <>
-                                            <div className= "flexCards">
-                                                {this.state.local.room.map((elm) =>
+                                <>
+                                    <div className="flexDates">
+                                        {this.state.local.room.map((elm) =>
 
-                                                        <Card style={{ width: '18rem' }}>
-                                                            <Card.Body>
-                                                                <Card.Title>{elm.name}</Card.Title>
-                                                                <Card.Img variant="top" src={elm.image} className="imageCard"/>
+                                            <Card style={{ width: '18rem' }} className="room-card">
+                                                <Card.Body>
+                                                    <Card.Title>{elm.name}</Card.Title>
+                                                    <Card.Img variant="top" src={elm.image} className="imageCard" />
 
-                                                            <Link to={`/sala/${elm._id}`} >Ver detalles y reservar</Link>
-                                                                <Card.Text>{elm.price}€/h</Card.Text>
-                                                            </Card.Body>
-                                                        </Card>
+                                                    <Link className="btnDetail" to={`/sala/${elm._id}`} >Ver detalles y reservar</Link>
+                                                 <br/>
+                                                    <br /><Card.Text>{elm.price}€/h</Card.Text>
+                                                </Card.Body>
+                                            </Card>
 
-                                                )}</div></>
-                                           
-                                        <hr />
+                                        )}</div></>
 
-                                        <Button onClick={this.goBack} className="btn btn-dark btn-block btn-sm">Go Back</Button>
+                                <hr />
 
-                                    
-                                 </>}
+                                <Button onClick={this.goBack} className="btn btn-dark btn-block btn-retro">Go Back</Button>
+
+
+                            </>}
                     </>
                     :
-                    <h1>Cargando</h1>
+                    <Loader />
+
                 }
 
             </Container>

@@ -8,18 +8,31 @@
     margin:2px
 }
 
-.pastCard {
-    background-color: rgb(230, 230, 230);
-    color: rgb(0, 0, 0);
-}
-
-.futureCard {
-    background-color: rgb(26, 39, 54);
-    color: rgb(255, 255, 255);
-}
 
 .cardTitle{
     text-align: center;
     font-size: 40px;
     font-weight: bold;
+}
+
+.futureCard{
+    color:white;
+
+    margin-bottom:15px;
+    background-image: linear-gradient(to right,#0c0729 0,#0c0918 100%) !important; /* override background image gradient w/ flat color */
+   box-shadow:
+
+    0 0 10px #fff,
+
+
+    0 0 100px #0ff;
+}
+
+
+.pastCard{
+    color:white;
+
+    margin-bottom:15px;
+    background-image: linear-gradient(to right,#2c2a34 0,#0a090b 100%) !important; /* override background image gradient w/ flat color */
+
 }

@@ -6,7 +6,8 @@ import React, { Component } from 'react'
 import LocalCard from '../Locals/Local-card'
 import LocalService from './../../../service/local.service'
 import './Profile-owner.css'
-
+import SubTitle from '../../layout/Home/SubTitle'
+import Loader from '../../shared/Loader/Loader'
 
 class ProfileOwner extends Component {
 
@@ -46,15 +47,17 @@ class ProfileOwner extends Component {
             <>
                 
                 <Container className="profileOwner">
-                    <h1>Tus locales</h1>
+                    <h1><SubTitle text="Tus locales"></SubTitle></h1>
                     {this.state.locals ?
                         <>
-                            <Link to="/nuevo-local"><Button className="btn btn-dark btn-sm btn-new">Nuevo local</Button></Link>
+                            <br/>
+                            <Link to="/nuevo-local"><Button className="btn-retro2">Nuevo local</Button></Link>
+                            <br/><br/>
                             <Row>
                                 {this.state.locals.map(elm => <LocalCard key={elm._id} {...elm} loggedUser={this.props.loggedUser._id} />)}
                             </Row></>
                         :
-                        <h1>cargando</h1>
+                        <Loader></Loader>
                     }
                 </Container>
             </>

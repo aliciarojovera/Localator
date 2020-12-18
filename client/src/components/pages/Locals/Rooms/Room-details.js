@@ -4,6 +4,9 @@ import BookingSchedule from './../booking/bookingSchedule'
 import LocalService from '../../../../service/local.service'
 import './Room-details.css'
 import { Col, Button, Row } from 'react-bootstrap'
+import SubTitle from '../../../layout/Home/SubTitle'
+import SubTitle2 from '../../../layout/Home/SubTitle2'
+import Loader from '../../../shared/Loader/Loader'
 
 
 
@@ -96,13 +99,16 @@ class RoomDetails extends Component {
                 <>
                     
                     <Row>
-                        <Col md={{ span: 5, offset: 1}}>
-                    <h1>{this.state.room.name}</h1>
-                    <img className="imgDetails" src={this.state.room.image} alt="Imagen del local"></img>
-                            <h3>Equipo</h3>
+                        <Col md={{ span: 5, offset: 1 }}>
+                        <br></br>
+                            <h1><SubTitle text={this.state.room.name}></SubTitle></h1>
+                            <br></br>
+                            <img className="imgDetails" src={this.state.room.image} alt="Imagen del local"></img>
+                            <br></br><br></br>
+                            <h1><SubTitle text="Equipo"></SubTitle></h1>
                             <ul>
                             {this.state.room.equipment.map(elm=>
-                                <li>{elm}</li>
+                                <li className="myLi"><SubTitle2 text={elm}></SubTitle2></li>
 
                             )}</ul>
                     </Col>
@@ -111,9 +117,9 @@ class RoomDetails extends Component {
 
                     <Col md={{ span: 4, offset: 1 }}>
                     <div className="flexDates">
-                        <Button className="btn btn-dark roomBtn" onClick={this.restDay}>Día anterior</Button>
-                        <h2 className="date">{this.state.currentDate.slice(0, 10)}</h2>
-                        <Button className="btn btn-dark roomBtn" onClick={this.addDay}>Siguiente día</Button>
+                        <Button className="btn btn-dark roomBtn btn-retro" onClick={this.restDay}>Día anterior</Button>
+                                <h2 className="date"><SubTitle2 text={this.state.currentDate.slice(0, 10)}></SubTitle2></h2>
+                        <Button className="btn btn-dark roomBtn btn-retro" onClick={this.addDay}>Siguiente día</Button>
                     </div>
 
                    

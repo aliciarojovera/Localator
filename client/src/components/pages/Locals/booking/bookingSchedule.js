@@ -3,6 +3,7 @@ import './bookingSchedule.css'
 import BookingService from '../../../../service/booking.service'
 import BookingModal from './bookingModal'
 import { Container, Modal } from 'react-bootstrap'
+import SubTitle from '../../../layout/Home/SubTitle'
 
 
 class BookingSchedule extends Component {
@@ -162,7 +163,7 @@ class BookingSchedule extends Component {
                 <>
                     {this.state.bookingHours.map((elm, idx) =>
                         <>
-                            <div onClick={() => this.handleClick(elm)} className={this.isRed(elm)} > <p>{this.isInvited(elm) ? elm.getHours() + "  " + this.isInvited(elm) : elm.getHours()}</p></div>
+                            <div onClick={() => this.handleClick(elm)} className={this.isRed(elm)} > <p>{this.isInvited(elm) ? elm.getHours() + ":00  " + this.isInvited(elm) : elm.getHours()+ ':00'}</p></div>
 
                             <Modal className=" Modal" show={this.state.showModal} onHide={() => this.handleModal(false)}>
                                 <Modal.Body>
@@ -187,8 +188,7 @@ class BookingSchedule extends Component {
                 </>
                 :
                 <Container className="center">
-                    <h4>Cerrado</h4>
-                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpyaNHTezXCdDPPXl6-ArzCO5S7DUIpRyklw&usqp=CAU' alt="Cerrado" />
+                    <h4><SubTitle text="-> CERRADO <-"></SubTitle></h4>
                 </Container>
         )
     }

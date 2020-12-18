@@ -5,6 +5,8 @@ import "flatpickr/dist/themes/material_green.css";
 import Flatpickr from "react-flatpickr";
 import './Local-form.css'
 import Autocomplete from '../Maps/Autocomplete'
+import SubTitle from '../../layout/Home/SubTitle'
+import SubTitle2 from '../../layout/Home/SubTitle2'
 
 
 class LocalForm extends Component {
@@ -90,24 +92,25 @@ latLngHandler = (latLng, address) => {
 
                     <Row>
                         <Col md={{ span: 8, offset: 2 }}>
-                            <h1>Editar local</h1>
+                            <br></br>
+                            <h1><SubTitle text="Editar local"/></h1>
                             <hr />
 
                             <Form onSubmit={this.handleSubmit}>
                                 
                                 
                                 <Form.Group controlId="username">
-                                    <Form.Label>Nombre</Form.Label>
+                                    <Form.Label><SubTitle2 text="Nombre" /></Form.Label>
                                     <Form.Control type="text" name="name" value={this.state.name} onChange={this.handleInputChange} />
                                 </Form.Group>
 
                                 <Form.Group controlId="telephone">
-                                    <Form.Label>Teléfono</Form.Label>
+                                    <Form.Label><SubTitle2 text="Teléfono" /></Form.Label>
                                     <Form.Control type="Text" name="telephone" value={this.state.telephone} onChange={this.handleInputChange} />
                                 </Form.Group>
 
                                 <Form.Group>
-                                    <Form.Label>Dirección</Form.Label>
+                                    <Form.Label><SubTitle2 text="Dirección" /></Form.Label>
                                     <Autocomplete handler={this.latLngHandler} default={this.state.address}></Autocomplete>
                                 </Form.Group>
 
@@ -120,12 +123,12 @@ latLngHandler = (latLng, address) => {
                                 </Form.Group>
 
                                 <div className="center">
-                                    <FormLabel >Horario</FormLabel>
+                                    <FormLabel  ><SubTitle2 text="Horario" /></FormLabel>
                                 </div>
 
                                 {this.state.days.map((elm, idx) =>
                                     <div className="forms" key={idx}>
-                                        <label>{elm}</label>
+                                        <label style={{color:"white"}}>{elm}</label>
                                         <div className="hour">
                                             <Flatpickr className="Flatpickr"
                                                 options={{
@@ -159,8 +162,8 @@ latLngHandler = (latLng, address) => {
                                             </Flatpickr>
                                         </div></div>
                                 )}
-                         
-                                <Button variant="dark" type="submit">Editar local</Button>
+                                <br/>
+                                <Button className="btn-retro" type="submit">Editar local</Button>
                             </Form>
                         </Col>
                     </Row>

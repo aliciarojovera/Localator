@@ -6,14 +6,14 @@ const MemberCard = ({ addOne, takeOne, name, mail, onChange, id }) => {
     return (
         <>
             <Form.Group className="formCard">
-                <Form.Label className="miembreTitle">Miembrx {id + 1}</Form.Label>
+                <Form.Label style={{ color: "white" }} className="miembreTitle">Miembrx {id + 1}</Form.Label>
                 <Row>
                     <Col sm={{ span: 5 }}>
-                        <Form.Label>Nombre</Form.Label>
+                        <Form.Label style={{ color: "white" }}>Nombre</Form.Label>
                         <Form.Control type="text" name="memberName" onChange={onChange()} id={id} placeholder="Nombre" defaultValue={name} />
                     </Col>
                     <Col sm={{ span: 5 }}>
-                        <Form.Label>Mail</Form.Label>
+                        <Form.Label style={{ color: "white" }}>Mail</Form.Label>
                         <Form.Control type="text" name="memberMail" onChange={onChange()} id={id} placeholder="Mail" defaultValue={mail} />
                     </Col>
                     <Col sm={{ span: 2 }}>

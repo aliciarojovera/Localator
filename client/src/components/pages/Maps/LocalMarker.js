@@ -17,7 +17,6 @@ const LocalMarker = ({ text, handleClick }) => {
 
             />
                 <div className="localMarkerTitle">{text}</div>
-                {hovered ? <div className="localHovered">La info del local</div> : null}
             </div>
 
         </>

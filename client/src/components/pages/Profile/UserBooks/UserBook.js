@@ -1,6 +1,9 @@
 import UserBookCard from './UserBookCard'
 import { Row, Col, Container } from 'react-bootstrap'
 import './UserBook.css'
+import SubTitle from '../../../layout/Home/SubTitle'
+import SubTitle2 from '../../../layout/Home/SubTitle2'
+import Loader from '../../../shared/Loader/Loader'
 
 const UserBook = ({ books }) => {
     //ordenar dates
@@ -16,7 +19,7 @@ const UserBook = ({ books }) => {
             <Container>
                 <hr></hr>
                 <br></br>
-                <h5 className="cardTitle">Futuras</h5>
+                <h5 className="cardTitle"><SubTitle text="Futuras"></SubTitle></h5>
                 <br></br>
                 <hr></hr>
                 <Row>
@@ -31,7 +34,7 @@ const UserBook = ({ books }) => {
                 </Row>
                 <hr></hr>
                 <br></br>
-                <h5 className="cardTitle">Pasadas</h5>
+                <h5 className="cardTitle"><SubTitle text="Pasadas"></SubTitle></h5>
                 <br></br>
                 <hr></hr>
                 <Row>

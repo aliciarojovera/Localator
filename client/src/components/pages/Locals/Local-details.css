@@ -21,3 +21,63 @@ margin: 20px 0
 height: 150px;
 object-fit: cover;
 }
+
+.btn-retro {
+  padding:0.4vw 1vw;
+  color:#fff;
+  font-family: 'Source Code Pro', monospace;
+  font-size:1.5vw;
+  text-shadow: 0px 0px 5px #fff;
+  background-color:#0AC;
+  background-image : linear-gradient(0deg, #fff2 0%, #fff2 25%, #0000 25%, #0000 50%, #fff3 50%, #fff4 75%, #0000 75%);
+  background-size: 0.8rem 0.8rem;
+  border: solid 2px linear-gradient(45deg, #0DD 0%, #00D 100%);
+  border-radius: 1vw;
+  box-shadow: 0px 0px 5px #E0E, 0px 0px 10px #00E,0px 0px 15px #0EE, inset 0px 0px 30px #055, inset 0px 0px 15px #099;
+  transition: all ease-in-out 0.5s;
+  cursor:pointer;
+}
+
+.btn-retro:hover{
+  box-shadow: 0px 5px 5px #F0F, 0px 0px 1000px #0000,0px 0px 15px #0EE, inset 0px 0px 30px #055;
+  background-color:#0CE;
+  border:solid 2px #0DF;
+  transform: translate(0px, -5px);
+}
+
+.date{
+    margin-top:20px
+}
+
+.room-card{
+    color:white;
+
+    background-image: linear-gradient(to right,#0c0729 0,#0c0918 100%) !important; /* override background image gradient w/ flat color */
+   box-shadow:
+
+    0 0 10px #fff,
+
+
+    0 0 100px #0ff;
+}
+
+.btnDetail {
+background-image: linear-gradient(to right,#0e1233 0,#680000 100%) !important; /* override background image gradient w/ flat color */
+   box-shadow:0 0 10px #fff;
+   color:white;
+   text-decoration: none;
+    padding: 10px 2px;
+    width:90%;
+    border-radius: 6px;
+   
+}
+
+.btnEditLocal {
+background-image: linear-gradient(to right,#ae4b00 0,#680000 100%) !important; /* override background image gradient w/ flat color */
+   box-shadow:
+
+    0 0 10px #fff;
+
+
+   
+}

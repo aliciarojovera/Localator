@@ -2,7 +2,7 @@
 import './foot.css'
 const Foot = () => {
     return (
- <footer>Footer</footer>
+        <div class="footer">Localator, reservas en locales de ensayo <strong>online</strong>.</div>
     )
 }
 

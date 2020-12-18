@@ -11,7 +11,7 @@ class Map extends Component {
                 lng: -3.7113449216902583
             },
             zoom: 13,
-            height:"400px"
+            height:"300px"
         }
     }
 

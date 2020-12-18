@@ -6,7 +6,7 @@ import './App.css'
 import Navigation from './layout/Navigation/navigation'
 import Signup from './pages/Signup/Signup'
 import SignupOwner from './pages/Signup/Signup.Owner'
-// import Footer from './layout/Navigation/foot'
+import Footer from './layout/Navigation/foot'
 import Login from './pages/Login/Login'
 import AuthService from './../service/auth.service'
 import Profile from './pages/Profile/Profile'
@@ -65,7 +65,7 @@ class App extends Component {
                         </main>
                     </>
                 </Switch>
-                {/* <Footer></Footer> */}
+                <Footer></Footer>
             </>
         )
     }

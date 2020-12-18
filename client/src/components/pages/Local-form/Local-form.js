@@ -5,7 +5,8 @@ import "flatpickr/dist/themes/material_green.css";
 import Flatpickr from "react-flatpickr";
 import './Local-form.css'
 import Autocomplete from '../Maps/Autocomplete'
-
+import SubTitle from '../../layout/Home/SubTitle'
+import SubTitle2 from '../../layout/Home/SubTitle2'
 
 class LocalForm extends Component {
 
@@ -79,42 +80,42 @@ class LocalForm extends Component {
 
                     <Row>
                         <Col md={{ span: 8, offset: 2 }}>
-                            <h1>Nuevo local</h1>
+                            <br/>
+                            <h1><SubTitle text="Nuevo local"></SubTitle></h1>
                             <hr />
 
                             <Form onSubmit={this.handleSubmit}>
                                 <Form.Group controlId="username">
-                                    <Form.Label>Nombre</Form.Label>
+                                    <Form.Label><SubTitle2 text="Nombre"></SubTitle2></Form.Label>
                                     <Form.Control type="text" name="name" value={this.state.username} onChange={this.handleInputChange} />
                                 </Form.Group>
 
                                 <Form.Group controlId="telephone">
-                                    <Form.Label>Teléfono</Form.Label>
+                                    <Form.Label><SubTitle2 text="Teléfono"></SubTitle2></Form.Label>
                                     <Form.Control type="Text" name="telephone" value={this.state.telephone} onChange={this.handleInputChange} />
                                 </Form.Group>
 
                                 <Form.Group>
-                                    <Form.Label>Dirección</Form.Label>
+                                    <Form.Label><SubTitle2 text="Dirección"></SubTitle2></Form.Label>
                                     <Autocomplete handler={this.latLngHandler}></Autocomplete>
                                 </Form.Group>
 
                                 <Form.Group controlId="latitude">
-                                    <Form.Label>Latitud</Form.Label>
-                                    <Form.Control type="text" name="latitude" value={this.state.latitude} onChange={this.handleInputChange} />
+                                    <Form.Control type="text" name="latitude " className="displayNone" value={this.state.latitude} onChange={this.handleInputChange} />
                                 </Form.Group>
 
                                 <Form.Group controlId="longitude">
-                                    <Form.Label>Longitud</Form.Label>
-                                    <Form.Control type="number" name="longitude" value={this.state.longitude} onChange={this.handleInputChange} />
+                                    <Form.Control type="number" name="longitude " className="displayNone" value={this.state.longitude} onChange={this.handleInputChange} />
                                 </Form.Group>
 
                                 <div className="center">
-                                    <FormLabel >Horario</FormLabel>
+                                    <FormLabel ><SubTitle2 text="Horario"></SubTitle2></FormLabel>
                                 </div>
 
                                 {this.state.days.map((elm, idx) => 
                                     <div key={idx} className="forms">
-                                    <label>{elm}</label>
+                                        <label style={{
+                                            color:"white"}}>{elm}</label>
                                     <div className="hour">
                                     <Flatpickr className="Flatpickr"
                                         options={{
@@ -147,8 +148,8 @@ class LocalForm extends Component {
                                     </Flatpickr>
                                         </div></div>
                                 )}
-                              
-                                <Button variant="dark" type="submit">Crear local</Button>
+                              <br></br>
+                                <Button className="btn-retro"type="submit">Crear local</Button>
                             </Form>
                         </Col>
                     </Row>

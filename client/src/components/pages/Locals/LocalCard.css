@@ -1,0 +1,32 @@
+.local-card{
+    color:white;
+
+    margin-bottom:15px;
+    background-image: linear-gradient(to right,#0c0729 0,#0c0918 100%) !important; /* override background image gradient w/ flat color */
+   box-shadow:
+
+    0 0 10px #fff,
+
+
+    0 0 100px #0ff;
+}
+
+.btnDetails {
+background-image: linear-gradient(to right,#0e1233 0,#680000 100%) !important; /* override background image gradient w/ flat color */
+   box-shadow:
+
+    0 0 10px #fff;
+
+
+   
+}
+
+.btnEditLocal {
+background-image: linear-gradient(to right,#ae4b00 0,#680000 100%) !important; /* override background image gradient w/ flat color */
+   box-shadow:
+
+    0 0 10px #fff;
+
+
+   
+}

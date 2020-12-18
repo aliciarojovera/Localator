@@ -3,6 +3,9 @@ import { Container, Row, Col } from 'react-bootstrap'
 import BookingService from './../../../service/booking.service'
 import MemberForm from './Members/MemberForm'
 import UserBook from './UserBooks/UserBook'
+import SubTitle from '../../layout/Home/SubTitle'
+import SubTitle2 from '../../layout/Home/SubTitle2'
+import Loader from '../../shared/Loader/Loader'
 
 class ProfileUser extends Component {
 
@@ -27,11 +30,13 @@ class ProfileUser extends Component {
     render() {
         return (
             <Container>
-                <h1>¡Bienvenid@, {this.state.loggedUser.username}!</h1>
+                <br></br>
+                <h1><SubTitle text={String.raw`Bienvenidx, ${this.state.loggedUser.username}!!`} /></h1>
+                <br></br>
 
                 <MemberForm user={this.state.loggedUser} storeUser={this.props.storeUser} />
 
-                <h2 className="cardTitle" >Tus reservas</h2>
+                <h2 className="cardTitle" ><SubTitle text="Tus reservas"></SubTitle></h2>
 
 
                 {this.state.books
@@ -40,7 +45,7 @@ class ProfileUser extends Component {
                         <UserBook books={this.state.books} />
                     </>
                     :
-                    <h1>cargando</h1>
+                    <Loader></Loader>
                 }
             </Container>
         )
