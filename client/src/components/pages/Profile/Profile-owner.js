@@ -7,7 +7,7 @@ import LocalCard from '../Locals/Local-card'
 import LocalService from './../../../service/local.service'
 import './Profile-owner.css'
 import SubTitle from '../../layout/Home/SubTitle'
-import Loader from '../../shared/Loader/Loader'
+import Loader from '../../layout/Loader/Loader'
 
 class ProfileOwner extends Component {
 

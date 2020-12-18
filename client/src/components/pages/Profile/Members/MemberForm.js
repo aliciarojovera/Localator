@@ -5,7 +5,7 @@ import ProfileService from './../../../../service/profile.service'
 import './MemberForm.css'
 import SubTitle from '../../../layout/Home/SubTitle'
 import SubTitle2 from '../../../layout/Home/SubTitle2'
-import Loader from '../../../shared/Loader/Loader'
+import Loader from '../../../layout/Loader/Loader'
 
 class MemberForm extends Component {
     constructor() {

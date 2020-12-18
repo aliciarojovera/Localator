@@ -16,25 +16,25 @@ class BookingForm extends Component {
             room: this.props.room,
             date: this.props.date,
             bookRoom: undefined,
-            name: undefined ,
+            name: undefined,
             chanceHours: undefined,
             numberHours: 1
         }
         this.bookingService = new BookingService()
-        this.EmailService= new EmailService()
+        this.EmailService = new EmailService()
     }
 
     componentDidMount = () => {
 
         if (this.props.room) {
-             this.setState({ bookRoom: this.props.room })
+            this.setState({ bookRoom: this.props.room })
         }
         else {
-              let rooms = this.props.rooms.filter(elm => elm._id === this.state.room)
-        this.setState({ bookRoom: rooms })
+            let rooms = this.props.rooms.filter(elm => elm._id === this.state.room)
+            this.setState({ bookRoom: rooms })
 
         }
-      
+
         this.getDate(this.state.date, this.props.books)
     }
 
@@ -51,15 +51,15 @@ class BookingForm extends Component {
         const room = this.state.room
         const owner = this.state.owner
         let name = ""
-        const emailData = [this.props.nameRoom, this.state.date.getHours(), this.state.date.getDate(), this.state.date.getMonth() + 1 ,this.state.date.getFullYear(), this.props.loggedUser.members , this.props.local]
+        const emailData = [this.props.nameRoom, this.state.date.getHours(), this.state.date.getDate(), this.state.date.getMonth() + 1, this.state.date.getFullYear(), this.props.loggedUser.members, this.props.local]
         if (this.props.loggedUser._id === this.props.localOwner) {
-            name=this.state.name
+            name = this.state.name
         }
         else {
-            name=this.props.loggedUser.username
+            name = this.props.loggedUser.username
         }
         for (let i = 0; i < numberHours; i++) {
-           
+
             let date = new Date(copyDate)
             this.bookingService
                 .newBook({ room, owner, date, name })
@@ -68,9 +68,9 @@ class BookingForm extends Component {
                     this.props.updateBooks()
                     this.props.closeModal()
                     this.EmailService
-                    .sendEmail(emailData)
+                        .sendEmail(emailData)
                 })
-                
+
                 .catch(err => console.log(err))
             copyDate = new Date(copyDate.setTime(copyDate.getTime() + (1 * 60 * 60 * 1000)))
         }
@@ -122,8 +122,10 @@ class BookingForm extends Component {
     // Procedimiento que pinta todas las opciones en un array 
     createOptions = () => {
         let myResult = []
-        for (let i = 1; i < this.state.chanceHours + 1; i++) {
+
+        for (let i = 1; i <= this.state.chanceHours; i++) {
             myResult.push(this.pushOne(i))
+            console.log(myResult)
         }
         return myResult
     }
@@ -146,7 +148,7 @@ class BookingForm extends Component {
                                 <Form.Label>Hora:</Form.Label>
                                 <br />
                                 <Form.Label>{this.state.date.getHours()}:00</Form.Label>
-
+    </Form.Group>
                                 {/* =====> RESERVA <====== */}
                                 <Form.Group>
                                     <Form.Label>¿Cuántas horas quieres reservar?:</Form.Label>
@@ -156,27 +158,28 @@ class BookingForm extends Component {
                                 </Form.Group>
                                 {/* =====> RESERVA <====== */}
 
-                            </Form.Group>
+                        
                             <Form.Group controlId="day">
                                 <Form.Label>Día</Form.Label>
                                 <br />
                                 <Form.Label>{this.state.date.getDate()} / {this.state.date.getMonth() + 1} / {this.state.date.getFullYear()}</Form.Label>
                             </Form.Group>
-                            {this.props.loggedUser._id===this.props.localOwner ? 
-                            <Form.Group controlId="name">
-                                <Form.Label>Nombre</Form.Label>
-                                <Form.Control type="text" name="name" value={this.state.name} onChange={this.handleInputChange} placeholder=""/>
+                            {this.props.loggedUser._id === this.props.localOwner ?
+                                <Form.Group controlId="name">
+                                    <Form.Label>Nombre</Form.Label>
+                                    <Form.Control type="text" name="name" value={this.state.name} onChange={this.handleInputChange} placeholder="" />
                                 </Form.Group>
-                            
+
                                 :
                                 <Form.Group controlId="name">
-                                 <Form.Label>Nombre: </Form.Label><br/>
-                            <Form.Label>{this.props.loggedUser.username}</Form.Label>
-                                  </Form.Group>
+                                    <Form.Label>Nombre: </Form.Label><br />
+                                    <Form.Label>{this.props.loggedUser.username}</Form.Label>
+                                </Form.Group>
 
                             }
-
-                            <Button variant="dark" type="submit">Confirmar reserva</Button>
+                            <div className="center">
+                                <button variant="dark" className="btn-retro center" type="submit">Confirmar reserva</button>
+                            </div>
                         </Form>
                     </>
                     :

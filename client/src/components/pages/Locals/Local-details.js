@@ -8,7 +8,7 @@ import BookingService from '../../../service/booking.service'
 import Map from "../Maps/Map"
 import SubTitle from '../../layout/Home/SubTitle'
 import SubTitle2 from '../../layout/Home/SubTitle2'
-import Loader from '../../shared/Loader/Loader'
+import Loader from '../../layout/Loader/Loader'
 
 
 

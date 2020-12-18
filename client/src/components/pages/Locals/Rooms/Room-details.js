@@ -6,7 +6,7 @@ import './Room-details.css'
 import { Col, Button, Row } from 'react-bootstrap'
 import SubTitle from '../../../layout/Home/SubTitle'
 import SubTitle2 from '../../../layout/Home/SubTitle2'
-import Loader from '../../../shared/Loader/Loader'
+import Loader from '../../../layout/Loader/Loader'
 
 
 
@@ -131,7 +131,7 @@ class RoomDetails extends Component {
                     
                 </Row></>
                 :
-                <h1>cargando</h1>
+                <Loader/>
 
                 
                 

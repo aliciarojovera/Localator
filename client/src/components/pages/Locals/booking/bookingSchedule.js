@@ -132,7 +132,6 @@ class BookingSchedule extends Component {
         } else {
             return false
         }
-        // return true
     }
 
     handleClick = (elm) => {

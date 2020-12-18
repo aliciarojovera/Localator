@@ -5,7 +5,7 @@ import MemberForm from './Members/MemberForm'
 import UserBook from './UserBooks/UserBook'
 import SubTitle from '../../layout/Home/SubTitle'
 import SubTitle2 from '../../layout/Home/SubTitle2'
-import Loader from '../../shared/Loader/Loader'
+import Loader from '../../layout/Loader/Loader'
 
 class ProfileUser extends Component {
 

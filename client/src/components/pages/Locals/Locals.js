@@ -5,7 +5,7 @@ import LocalService from '../../../service/local.service'
 import Map from '../Maps/Map'
 import SubTitle from '../../layout/Home/SubTitle'
 import './Locals.css'
-import Loader from '../../shared/Loader/Loader'
+import Loader from '../../layout/Loader/Loader'
 
 class Locals extends Component {
 
