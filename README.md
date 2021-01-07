@@ -17,8 +17,8 @@ I tried to pay attention to details such as the possibility of reserving as many
 <img src="https://res.cloudinary.com/aliciarojo/image/upload/v1609445431/Screenshot_from_2020-12-31_21-07-58_ux1nxs.png">
 This is what an alien reservation looks like from the point of view of a band user. If the reservation belonged to the user himself, his name would appear in the box. When making a reservation from a user of a music group, an email is sent to all group members with the address and name of the venue and the time of the reservation by nodemailer.
 <br>
+
 I leave here a user registered as owner of a test site in case you want to investigate the web. <br>
 
 User: user<br>
-
 Password: useruser
