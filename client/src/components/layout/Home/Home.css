@@ -44,3 +44,21 @@
 .homeHeaderMain {
     z-index: 0;
 }
+@media (max-width: 600px){
+  .none{
+      display:none
+  }
+.mainTitle{
+    margin-top:40px
+}
+.StartBtn{
+ display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50vh;
+}
+.StartBtn .container{
+margin:0 auto;
+margin-left: 50%;
+  }
+}

@@ -37,7 +37,7 @@ class Locals extends Component {
         return (
             <>
                 <Map locals={this.state.locals} />
-                <Container><br/>
+                <Container className="list"><br/>
                     <SubTitle className="listTitle" text="Listado de locales"></SubTitle>
                     {this.state.locals ?
                         <>

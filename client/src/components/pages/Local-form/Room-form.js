@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import localService from '../../../service/local.service'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import FilesService from '../../../service/upload.service'
+import './Room-form.css'
 
 
 class RoomForm extends Component {
@@ -103,7 +104,7 @@ class RoomForm extends Component {
                 <Container>
 
                     <Row>
-                        <Col md={{ span: 8, offset: 2 }}>
+                        <Col md={{ span: 8, offset: 2 }} className="white">
                             <h1>Nueva sala</h1>
                             <hr />
                             <Form onSubmit={this.handleSubmit}>
@@ -135,8 +136,8 @@ class RoomForm extends Component {
                                                 <div className="btn-box flex">
                                                     <button className="remove"
 
-                                                        onClick={() => this.handleRemoveClick(index)}>Remove</button>
-                                                    {this.state.equipment.length - 1 === index && <button className="Add"
+                                                        onClick={() => this.handleRemoveClick(index)} className="btn-retro">Remove</button>
+                                                    {this.state.equipment.length - 1 === index && <button className="btn-retro"
 
                                                         onClick={() => this.handleAddClick(index)}>Add</button>}
                                                 </div></Col>
@@ -153,7 +154,7 @@ class RoomForm extends Component {
                                 <br>
 
                                 </br>
-                                <Button variant="dark" type="submit" >Crear sala</Button>
+                                <Button variant="dark" type="submit" className="btn-retro">Crear sala</Button>
 
                             </Form>
                         </Col>

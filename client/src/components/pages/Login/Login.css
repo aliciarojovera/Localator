@@ -116,3 +116,13 @@ height: 100vh;
     color:white;
     text-decoration: none;
 }
+@media (max-width: 600px){
+  .none{
+      display:none
+  }
+
+.generaldiv .container{
+margin:0 auto;
+margin-left:0px;
+  }
+}

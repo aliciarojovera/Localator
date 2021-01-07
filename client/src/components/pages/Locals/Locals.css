@@ -14,3 +14,10 @@ text-align: center;
   .locals{
     margin-top:20px
   }
+  @media (max-width: 600px){
+.list{
+ width:80%;
+ margin: 0 auto;
+}
+  
+}

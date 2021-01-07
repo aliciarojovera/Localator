@@ -23,4 +23,5 @@ padding-right: .5rem;
 .navbar,
 .navbar-default {
     background-image: linear-gradient(to right,#47123c 0,#0f1158 100%) !important; /* override background image gradient w/ flat color */
+    z-index:10
 }

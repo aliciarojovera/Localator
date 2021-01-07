@@ -10,16 +10,16 @@ const Home = () => {
     }
     return (
         <>
-            <div className="mainTitle">
-                <MainTitle/>
+            <div className="mainTitle none">
+                <MainTitle />
             </div>
-            <div className="subTitle">
+            <div className="subTitle none">
                 <SubTitle text="Reserva ya en tus locales de ensayo"/>
             </div>
             <div onClick={() => myClick()} className="StartBtn">
-                <StartBtn/>
+                <StartBtn className= "start"/>
             </div>
-            <div className="homeHeaderMain">
+            <div className="homeHeaderMain ">
                 <HomeHeader/>
             </div>
         </>
